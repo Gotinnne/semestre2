@@ -607,8 +607,8 @@ GameObject:
   - component: {fileID: 513502405}
   - component: {fileID: 513502404}
   - component: {fileID: 513502403}
-  - component: {fileID: 513502402}
   - component: {fileID: 513502401}
+  - component: {fileID: 513502407}
   - component: {fileID: 513502400}
   m_Layer: 0
   m_Name: LV_Player
@@ -658,22 +658,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &513502402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4731775306656913913, guid: 5cb738b7a38ac0642b2a75e73b5a36bc, type: 3}
-  m_PrefabInstance: {fileID: 2037335889}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513502399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b009074d48d308243bec9e2f6460af50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destination: {fileID: 2037335890}
-  Ping: 101
-  MaxTimeFollow: 1
-  TimeFollow: 0
 --- !u!136 &513502403
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -764,6 +748,22 @@ Transform:
   - {fileID: 1528005849}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &513502407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513502399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b009074d48d308243bec9e2f6460af50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 2037335890}
+  Ping: 101
+  MaxTimeFollow: 1
+  TimeFollow: 0
 --- !u!1 &520191612
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 2037335892}
   - component: {fileID: 2037335891}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: LV_Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2452,6 +2452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LV_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3682302488335764862, guid: 5cb738b7a38ac0642b2a75e73b5a36bc, type: 3}
+      propertyPath: m_Name
+      value: LV_Cylinder
+      objectReference: {fileID: 0}
     - target: {fileID: 4494960094815441945, guid: 5cb738b7a38ac0642b2a75e73b5a36bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.4
@@ -2496,7 +2500,8 @@ PrefabInstance:
       propertyPath: destination
       value: 
       objectReference: {fileID: 2037335890}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

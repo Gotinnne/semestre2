@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Sci_Spawn.cs" />
     <Compile Include="Assets\Sci_RayCast.cs" />
+    <Compile Include="Assets\L_variante\LV_Sci_Ping.cs" />
     <Compile Include="Assets\Sci_LaunchIdle.cs" />
     <Compile Include="Assets\Sci_Ping.cs" />
     <Compile Include="Assets\Sci_PlayerController.cs" />
