@@ -61,7 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Sci_Spawn.cs" />
+    <Compile Include="Assets\Scripts\Sci_Var_Cam\Sci_Ping_Var_Cam.cs" />
     <Compile Include="Assets\Sci_RayCast.cs" />
+    <Compile Include="Assets\Scripts\Sci_Var_Cam\Sci_RayCast_Var_Cam.cs" />
+    <Compile Include="Assets\Scripts\Sci_Var_MultiPath\Sci_Var_MultiPath_Individu.cs" />
+    <Compile Include="Assets\Scripts\Sci_Var_CamVisibility\Sci_RayCast_Var_CamVisibility.cs" />
     <Compile Include="Assets\L_variante\LV_Sci_Ping.cs" />
     <Compile Include="Assets\Sci_LaunchIdle.cs" />
     <Compile Include="Assets\Sci_Ping.cs" />
