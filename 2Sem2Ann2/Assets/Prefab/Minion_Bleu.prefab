@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 8443784208219156276}
   - component: {fileID: 5808438264454997893}
   - component: {fileID: 5392383418810318864}
-  - component: {fileID: -520694756854032398}
-  - component: {fileID: 3502542514709810238}
-  - component: {fileID: 4756451045894930023}
+  - component: {fileID: -1980264229173836836}
+  - component: {fileID: -5444406420069922857}
+  - component: {fileID: -535329178622545718}
   m_Layer: 0
-  m_Name: Ennemi_Gnip
-  m_TagString: Ennemi
+  m_Name: Minion_Bleu
+  m_TagString: Bleu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 3880380468315793965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5d06cc70ad42a1b48816290761831e16, type: 2}
+  - {fileID: 2100000, guid: c9524b2ec7ea0c24abe8f4edd138a6b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -161,40 +161,8 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
---- !u!114 &-520694756854032398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3880380468315793965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665a91924e4c1bd4ca9f75d51a3b1c94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 2
-  healthBar: {fileID: 4213120696858874132}
---- !u!114 &3502542514709810238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3880380468315793965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d08c2119e3cd055478746d13335a3cfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Exit: {fileID: 0}
-  target: {x: 0, y: 0, z: 0}
-  DgtIndividu: 1
-  maxTimerAttack: 2
-  targetEnnemiVerif: 0
---- !u!136 &4756451045894930023
+  m_CollisionDetection: 0
+--- !u!136 &-1980264229173836836
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,9 +182,47 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5444406420069922857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3880380468315793965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665a91924e4c1bd4ca9f75d51a3b1c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 2
+  Spawner: {fileID: 0}
+  maxTimer: 0
+  Timer: 0
+  lenghtHealthBar: 2
+--- !u!114 &-535329178622545718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3880380468315793965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48fadaa22c7c2c45ad08145c9261241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exit: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+  dgtMinion: 0.5
+  maxTimerAttack: 1
+  targetEnnemiVerif: 0
+  targetEnnemi: {x: 0, y: 0, z: 0}
+  baliseVerif: 0
+  WhoAttack: 1
 --- !u!1 &8007074457770460371
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +252,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 2, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8695632258355157429}
@@ -279,7 +285,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5d06cc70ad42a1b48816290761831e16, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
