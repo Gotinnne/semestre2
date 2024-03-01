@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Sci_PlayerController_Gnip : MonoBehaviour
 { 
-    public float speed = 10f;
+    public float speed = 5f;
     public Vector3 direction;
     private Rigidbody rb;
     private bool IsGrounded;
@@ -44,33 +45,9 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             timeBaliseVerif = true;
         }
 
-
-
         // obtenir la direction vers laquelle on applique la force, Raw permet de réaliser un ".normalized"
-        direction = transform.right * Input.GetAxisRaw("Horizontal") + transform.forward * Input.GetAxisRaw("Vertical");
-
-        // applique directement sur velocity la direction multiplier part la speed
-        // prévision problème: en fesant de cette manière la force de collisions du joueur est très puissante et assure des problèmes lors d'utilisation de la physique
-        rb.velocity = (direction * speed);
-
-        // permet d'appliquer le IS Grounded (sécurité au cas ou le joueur arrive sauter)
-        if (rb.gameObject.transform.position.y >= 0)
-        {
-            IsGrounded = false;
-        }
-        if (rb.gameObject.transform.position.y == 0 & IsGrounded == false)
-        {
-            IsGrounded = true;
-        }
-        // permet d'appliquer une gravité si le joueur (sécurité au cas ou le joueur arrive sauter)
-        if (rb == !IsGrounded)
-        {
-            rb.AddForce(new Vector3(0, -9.14f, 0), ForceMode.Force);
-        }
-        if (rb == IsGrounded)
-        {
-            rb.AddForce(new Vector3(0, 0, 0), ForceMode.Force);
-        }
+        direction = (Vector3.right * Input.GetAxisRaw("Horizontal") + Vector3.forward * Input.GetAxisRaw("Vertical")).normalized;
+        rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
     }
 
     void PoseBalise()

@@ -4,6 +4,10 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+public enum TypeAgentBalise
+{
+    Bleu, Rouge
+};
 
 public class Sci_Balise_Gnip : MonoBehaviour
 {
@@ -14,16 +18,20 @@ public class Sci_Balise_Gnip : MonoBehaviour
     private float timePing = 0;
     public float maxTimePing;
 
-    public float timeRemaining = 0;
+    private float timeRemaining = 0;
     public float maxTime;
 
-    public float distanceDestination = 5;
+    public float distanceDestination = 2;
 
+    public TypeAgentBalise BaliseTag;
     void OnTriggerEnter(Collider other)
     {
-        if (!objectsInTrigger.ContainsKey(other.GetInstanceID()))
+        if(other.gameObject.tag == BaliseTag.ToString())
         {
-            objectsInTrigger.Add(other.GetInstanceID(), other.gameObject);
+            if (!objectsInTrigger.ContainsKey(other.GetInstanceID()))
+            {
+                objectsInTrigger.Add(other.GetInstanceID(), other.gameObject);
+            }
         }
     }
 
@@ -52,29 +60,6 @@ public class Sci_Balise_Gnip : MonoBehaviour
             Destroy(transform.parent.gameObject);
         }
     }
-
-    //void IdleBalise()
-    //{
-    //    foreach (var obj in objectsInTrigger.Values)
-    //    {
-    //        if(obj != null)
-    //        {
-    //            if (obj.GetComponent<Sci_Individu_Gnip>().targetEnnemiVerif == false)
-    //            {
-    //                NavMeshAgent agent = obj.GetComponent<NavMeshAgent>();
-    //                agent.SetDestination(new Vector3(Random.Range(destination.position.x - distanceDestination, destination.position.x + distanceDestination), 0, Random.Range(destination.position.z - distanceDestination, destination.position.z + distanceDestination)));
-    //                if (agent == null)
-    //                {
-    //                    objectsInTrigger.Remove(gameObject.GetInstanceID());
-    //                }
-    //            }
-    //            if (timeRemaining >= maxTime)
-    //            {
-    //                obj.GetComponent<Sci_Individu_Gnip>().Follow();
-    //            }
-    //        }
-    //    }
-    //}
     void IdleBalise()
     {
         List<int> objectsToRemove = new List<int>(); // Pour stocker les IDs des objets à supprimer

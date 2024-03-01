@@ -4,12 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Exit1
-  - Individu
-  - Sol
-  - Ennemi
-  - Exit2
-  - Exit3
+  - spawner
+  - Bleu
+  - Rouge
   layers:
   - Default
   - TransparentFX

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+public enum TypeAgent
+{
+    Bleu, Rouge
+};
 
 public class Sci_Individu_Gnip : MonoBehaviour
 {
     private NavMeshAgent agent;
-    public GameObject Exit;
+    public GameObject exit;
     public Vector3 target;
     private bool followVerif;
 
-    public float DgtIndividu;
+    public float dgtMinion;
     private float timerAttack;
     public float maxTimerAttack;
 
@@ -21,29 +25,27 @@ public class Sci_Individu_Gnip : MonoBehaviour
 
     public bool baliseVerif;
 
+    public TypeAgent WhoAttack;
     void Start()
     {
-        Exit = GameObject.FindGameObjectWithTag("Exit1");
+        exit = GameObject.Find("Spawner_"+ WhoAttack.ToString());
         agent = GetComponent<NavMeshAgent>();
 
-        target = new Vector3(Random.Range(Exit.GetComponent<Transform>().position.x - 5, Exit.GetComponent<Transform>().position.x + 5), 0, Exit.GetComponent<Transform>().position.z - 1);
+        target = new Vector3(Random.Range(exit.GetComponent<Transform>().position.x - 5, exit.GetComponent<Transform>().position.x + 5), 0, exit.GetComponent<Transform>().position.z - 1);
         agent.SetDestination(target);
-
-
     }
-
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Ennemi" && targetEnnemiVerif == false)
+        if (other.gameObject.tag == WhoAttack.ToString() && targetEnnemiVerif == false)
         {
             ennemiToAttack = other.gameObject;
             Attack();
-            targetEnnemiVerif = true; 
+            targetEnnemiVerif = true;
             followVerif = false;
             baliseVerif = false;
         }
-        if (other.gameObject.tag == "Balise")
+        if (other.gameObject.name == "Balise_" + this.gameObject.tag)
         {
             baliseVerif = true;
         }
@@ -62,30 +64,32 @@ public class Sci_Individu_Gnip : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Ennemi")
+        if (collision.gameObject.tag == WhoAttack.ToString())
         {
+
             timerAttack = timerAttack + Time.deltaTime;
             if (timerAttack >= maxTimerAttack)
             {
                 GameObject EnnemiGameObject = collision.gameObject;
                 Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
-                if (healthComponent.health - DgtIndividu <= 0)
+                if (healthComponent.health - dgtMinion <= 0)
                 {
-                    healthComponent.InflictDgt(DgtIndividu);
+                    healthComponent.InflictDgt(dgtMinion);
                     targetEnnemiVerif = false;
+                    baliseVerif = false;
                 }
                 else
                 {
-                    healthComponent.InflictDgt(DgtIndividu);
+                    healthComponent.InflictDgt(dgtMinion);
                 }
                 timerAttack = 0;
             }
         }
     }
-
     public void Follow()
     {
-        target = new Vector3(Random.Range(Exit.GetComponent<Transform>().position.x - 5, Exit.GetComponent<Transform>().position.x + 5), 0, Exit.GetComponent<Transform>().position.z - 1);
+        //call target
+        target = new Vector3(Random.Range(exit.GetComponent<Transform>().position.x - 5, exit.GetComponent<Transform>().position.x + 5), 0, exit.GetComponent<Transform>().position.z - 1);
         agent.SetDestination(target);
         followVerif = true;
     }

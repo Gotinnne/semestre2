@@ -60,22 +60,22 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Sci_Individu.cs" />
-    <Compile Include="Assets\Scripts\Sci_Ping.cs" />
-    <Compile Include="Assets\Scripts\Sci_Var_Cam\Sci_Ping_Var_Cam.cs" />
-    <Compile Include="Assets\Scripts\Sci_Var_Cam\Sci_RayCast_Var_Cam.cs" />
-    <Compile Include="Assets\Scripts\Sci_PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Sci_Var_MultiPath\Sci_Var_MultiPath_Individu.cs" />
-    <Compile Include="Assets\Scripts\Sci_Var_CamVisibility\Sci_RayCast_Var_CamVisibility.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Individu.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_LaunchIdle.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_CamVisibility\Sci_RayCast_Var_CamVisibility.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_Spawn_Gnip.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_Cam\Sci_RayCast_Var_Cam.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Health_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_PlayerController_Gnip.cs" />
-    <Compile Include="Assets\Sci_Gnip\Sci_Ennemi_Gnip.cs" />
-    <Compile Include="Assets\Scripts\Sci_Spawn.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Spawn.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Ping.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Individu_Gnip.cs" />
-    <Compile Include="Assets\Scripts\Sci_LaunchIdle.cs" />
-    <Compile Include="Assets\Scripts\Sci_Exit.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_Cam\Sci_Ping_Var_Cam.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Exit.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_MultiPath\Sci_Var_MultiPath_Individu.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Gnip.cs" />
-    <Compile Include="Assets\Scripts\Sci_RayCast.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_PlayerController.cs" />
+    <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_RayCast.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
