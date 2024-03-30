@@ -6,15 +6,15 @@ public class Sci_Spawn_Gnip : MonoBehaviour
 {
     public GameObject spawn;
 
-    public float Timer;
+    private float Timer;
     public float timeBetweenSpawn;
 
-    public float timerVague;
+    private float timerVague;
     public float maxTimerVague;
 
     public List<Color> ColoursList;
 
-    public float compteurMinions;
+    private float compteurMinions;
     public float compteurMinionsMax;
 
     void Update()
@@ -22,10 +22,10 @@ public class Sci_Spawn_Gnip : MonoBehaviour
         timerVague = timerVague + Time.deltaTime;
         if (maxTimerVague <= timerVague) 
         {
-            while(compteurMinionsMax != compteurMinions)
+            if (compteurMinions != compteurMinionsMax)
             {
                 Timer = Timer + Time.deltaTime;
-                if (timeBetweenSpawn < Timer)
+                if (timeBetweenSpawn <= Timer)
                 {
                     GameObject Individu;
                     Individu = Instantiate(spawn, new Vector3(Random.Range(gameObject.transform.position.x + 1, gameObject.transform.position.x - 1), 0, Random.Range(gameObject.transform.position.z + 1, gameObject.transform.position.z - 1)), spawn.transform.rotation);
@@ -35,8 +35,11 @@ public class Sci_Spawn_Gnip : MonoBehaviour
                     Timer = 0;
                 }
             }
-            timerVague = 0;
-            compteurMinions = 0;
+            if(compteurMinions == compteurMinionsMax)
+            {
+                compteurMinions = 0;
+                timerVague = 0;
+            }    
         }
     }
 }
