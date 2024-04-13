@@ -4,26 +4,30 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-public enum TypeAgentBalise
-{
-    Bleu, Rouge
-};
+
 
 public class Sci_Balise_Gnip : MonoBehaviour
 {
-    public Transform destination; 
-   
     private Dictionary<int, GameObject> objectsInTrigger = new Dictionary<int, GameObject>();
-
+    //timer Ping balise
     private float timePing = 0;
     public float maxTimePing;
 
+    //timer temps restant balise
     private float timeRemaining = 0;
     public float maxTime;
 
+    //destination balise
+    public Transform destination;
     public float distanceDestination = 2;
 
+    //couleur balise
+    public enum TypeAgentBalise
+    {
+        Bleu, Rouge
+    };
     public TypeAgentBalise BaliseTag;
+
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == BaliseTag.ToString())
@@ -37,6 +41,7 @@ public class Sci_Balise_Gnip : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        //permet d'arreter set destination si individu sort de la zone
         if (objectsInTrigger.ContainsKey(other.GetInstanceID()))
         {
             objectsInTrigger.Remove(other.GetInstanceID());
@@ -45,19 +50,17 @@ public class Sci_Balise_Gnip : MonoBehaviour
 
     void Update()
     {
-        this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
         timeRemaining = timeRemaining + Time.deltaTime;
         timePing = timePing + Time.deltaTime;
         if (timePing >= maxTimePing)
         {
             IdleBalise();
             timePing = 0;
-            this.gameObject.GetComponent<MeshRenderer>().material.color = Color.grey;
         }
         if (timeRemaining >= maxTime)
         {
             IdleBalise();
-            Destroy(transform.parent.gameObject);
+            Destroy(gameObject);
         }
     }
     void IdleBalise()
@@ -87,7 +90,7 @@ public class Sci_Balise_Gnip : MonoBehaviour
                     if (sciIndividu != null)
                     {
                         // Appeler Follow() peut lancer une NullReferenceException si sciIndividu est null
-                        sciIndividu.Follow();
+                        obj.gameObject.GetComponent<Sci_Individu_Gnip>().ChangeState(Sci_Individu_Gnip.State.Follow);
                     }
                 }
             }
@@ -100,4 +103,9 @@ public class Sci_Balise_Gnip : MonoBehaviour
         }
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(this.transform.position, 5);
+    }
 }
