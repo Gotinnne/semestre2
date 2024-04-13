@@ -27,6 +27,7 @@ public class Sci_Balise_Gnip : MonoBehaviour
         Bleu, Rouge
     };
     public TypeAgentBalise BaliseTag;
+
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == BaliseTag.ToString())
@@ -102,4 +103,9 @@ public class Sci_Balise_Gnip : MonoBehaviour
         }
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(this.transform.position, 5);
+    }
 }

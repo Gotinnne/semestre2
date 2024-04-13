@@ -10,6 +10,9 @@ public class Sci_Health_Gnip : MonoBehaviour
     public float maxHealth;
     private Transform healthBar;
 
+    public float shield;
+    public bool shieldActif;
+
     public Sci_Spawn_Gnip Spawner;
     public float maxTimerSpawn;
     public float timerSpawn;
@@ -78,7 +81,28 @@ public class Sci_Health_Gnip : MonoBehaviour
     }
     public void InflictDgt(float Dgt)
     {
-        health = health - Dgt;
-        lenghtHealthBar = (lenghtHealthBarMax * (health/maxHealth));
+        shield = shield - Dgt;
+        if(shield < 0)
+        {
+            health = health + shield;
+            shieldActif = false;
+            UpdateHealthBar();
+        }
+        else if (shield == 0)
+        {
+            if(shieldActif == false)
+            {
+                health = health - Dgt;
+                UpdateHealthBar();
+            }
+            else if (shieldActif == true)
+            {
+                shieldActif = false;
+            }
+        }
+    }
+    public void UpdateHealthBar()
+    {
+        lenghtHealthBar = (lenghtHealthBarMax * (health / maxHealth));
     }
 }

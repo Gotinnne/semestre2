@@ -246,14 +246,18 @@ MonoBehaviour:
   speed: 10
   direction: {x: 0, y: 0, z: 0}
   keyPoseBalise: 101
-  Balise: {fileID: 6726755270018408345, guid: 5d625c4229fcadd4eaedff424df26dc0, type: 3}
+  Balise1: {fileID: 6726755270018408345, guid: 5d625c4229fcadd4eaedff424df26dc0, type: 3}
+  Balise2: {fileID: 0}
+  Balise3: {fileID: 0}
+  Balise4: {fileID: 0}
   maxTimeBalise: 10
   keyModeBalise: 102
-  destination: {fileID: 0}
+  destination: {fileID: 7367069445219637998}
   distanceDestination: 2
   modeBaliseVerif: 0
   maxTimePing: 0
   BaliseTag: 0
+  choixBalise: 0
 --- !u!114 &4979982696777101595
 MonoBehaviour:
   m_ObjectHideFlags: 0

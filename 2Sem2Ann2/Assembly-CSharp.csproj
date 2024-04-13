@@ -61,10 +61,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Individu.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_Balise_Attaque_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_LaunchIdle.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_CamVisibility\Sci_RayCast_Var_CamVisibility.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Spawn_Gnip.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_Balise_Bouclier_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_Cam\Sci_RayCast_Var_Cam.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_Balise_Regen_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Health_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_PlayerController_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Spawn.cs" />
