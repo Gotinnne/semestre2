@@ -3,23 +3,17 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
-
-public class Sci_Balise_Gnip : MonoBehaviour
+public class Sci_Balise_Regen_Gnip : MonoBehaviour
 {
     private Dictionary<int, GameObject> objectsInTrigger = new Dictionary<int, GameObject>();
     //timer Ping balise
-    private float timePing = 0;
-    public float maxTimePing;
+    private float timeRegen = 0;
+    public float maxTimeRegen;
 
     //timer temps restant balise
     private float timeRemaining = 0;
     public float maxTime;
-
-    //destination balise
-    public Transform destination;
-    public float distanceDestination = 2;
 
     //couleur balise
     public enum TypeAgentBalise
@@ -28,9 +22,12 @@ public class Sci_Balise_Gnip : MonoBehaviour
     };
     public TypeAgentBalise BaliseTag;
 
+    private Sci_Health_Gnip scriptHealth;
+    public float amountRegenHealth;
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == BaliseTag.ToString())
+        if (other.gameObject.tag == BaliseTag.ToString())
         {
             if (!objectsInTrigger.ContainsKey(other.GetInstanceID()))
             {
@@ -51,11 +48,11 @@ public class Sci_Balise_Gnip : MonoBehaviour
     void Update()
     {
         timeRemaining = timeRemaining + Time.deltaTime;
-        timePing = timePing + Time.deltaTime;
-        if (timePing >= maxTimePing)
+        timeRegen = timeRegen + Time.deltaTime;
+        if (timeRegen >= maxTimeRegen)
         {
             IdleBalise();
-            timePing = 0;
+            timeRegen = 0;
         }
         if (timeRemaining >= maxTime)
         {
@@ -70,32 +67,25 @@ public class Sci_Balise_Gnip : MonoBehaviour
         {
             if (obj != null)
             {
-                // Vérifie si l'objet possède un NavMeshAgent
-                NavMeshAgent agent = obj.GetComponent<NavMeshAgent>();
-                if (agent != null)
+                // Vérifie si l'objet possède le code health
+                scriptHealth = obj.GetComponent<Sci_Health_Gnip>();
+                if (scriptHealth != null)
                 {
-                    // SetDestination peut lancer une NullReferenceException si agent est null
-                    agent.SetDestination(new Vector3(Random.Range(destination.position.x - distanceDestination, destination.position.x + distanceDestination), 0, Random.Range(destination.position.z - distanceDestination, destination.position.z + distanceDestination)));
-                }
-                else
-                {
-                    // Si l'agent est null, marquez l'objet pour suppression
-                    objectsToRemove.Add(obj.GetInstanceID());
-                }
-
-                if (timeRemaining >= maxTime)
-                {
-                    // Vérifie si l'objet possède un composant Sci_Individu_Gnip
-                    Sci_Individu_Gnip sciIndividu = obj.GetComponent<Sci_Individu_Gnip>();
-                    if (sciIndividu != null)
+                    if (scriptHealth.health < scriptHealth.maxHealth)
                     {
-                        // Appeler Follow() peut lancer une NullReferenceException si sciIndividu est null
-                        obj.gameObject.GetComponent<Sci_Individu_Gnip>().ChangeState(Sci_Individu_Gnip.State.Follow);
+                        //Debug.Log("regen effectuer");
+                        //Debug.Log(obj);
+                        scriptHealth.health = scriptHealth.health + amountRegenHealth;
+                        scriptHealth.UpdateHealthBar();
+                        // Si health est augmenter au dessus de maxhealth, le met au même niveau
+                        if (scriptHealth.health > scriptHealth.maxHealth)
+                        {
+                            scriptHealth.health = scriptHealth.maxHealth;
+                        }
                     }
                 }
             }
         }
-
         // Supprimer les objets marqués pour suppression
         foreach (int id in objectsToRemove)
         {

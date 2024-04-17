@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
+
 public class Sci_PlayerController_Gnip : MonoBehaviour
 { 
     //Deplacement player
@@ -15,7 +16,10 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
     //Pose balise
     private bool timeBaliseVerif;
     public KeyCode keyPoseBalise = KeyCode.E;
-    public GameObject Balise;
+    public GameObject Balise1;
+    public GameObject Balise2;
+    public GameObject Balise3;
+    public GameObject Balise4;
 
     //timer Pose balise
     private float timeBalise = 0;
@@ -36,13 +40,20 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
         Bleu, Rouge
     };
     public TypeAgentBalise BaliseTag;
+    public enum State
+    {
+        Balise1,
+        Balise2,
+        Balise3,
+        Balise4
+    }
+    public State choixBalise;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         destination = this.gameObject.transform;
     }
-
     void Update()
     {
         if (Input.GetKeyDown(keyPoseBalise))
@@ -58,7 +69,6 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
         //Lancer timer si balise poser
         if (timeBaliseVerif == false)
         {
-
             timeBalise = timeBalise + Time.deltaTime;
         }
         //Reset timer
@@ -67,6 +77,26 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             timeBalise = 0;
             timeBaliseVerif = true;
         }
+
+
+        if (Input.GetKeyDown("1"))
+        {
+            choixBalise = State.Balise1;
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            choixBalise = State.Balise2;
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            choixBalise = State.Balise3;
+        }
+        if (Input.GetKeyDown("4"))
+        {
+            choixBalise = State.Balise4;
+        }
+
+
 
         if (Input.GetKeyDown(keyModeBalise) && modeBaliseVerif == true)
         {
@@ -80,7 +110,6 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             modeBaliseVerif = true;
             timePing = 0;
         }
-
         if (modeBaliseVerif == true)
         {
             //si Mode balie actif, démarrer boucle avec timer (fonctionnement balise)
@@ -91,7 +120,6 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
                 timePing = 0;
             }
         }
-
         // obtenir la direction vers laquelle on applique la force, Raw permet de réaliser un ".normalized"
         direction = (Vector3.right * Input.GetAxisRaw("Horizontal") + Vector3.forward * Input.GetAxisRaw("Vertical")).normalized;
         rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
@@ -99,9 +127,22 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
 
     void PoseBalise()
     {
-        Instantiate(Balise, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+        switch (choixBalise)
+        {
+            case State.Balise1:
+                Instantiate(Balise1, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+                break;
+            case State.Balise2:
+                Instantiate(Balise2, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+                break;
+            case State.Balise3:
+                Instantiate(Balise3, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+                break;
+            case State.Balise4:
+                Instantiate(Balise4, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+                break;
+        }
     }
-
     void ModeBalise()
     {
         List<int> objectsToRemove = new List<int>(); // Pour stocker les IDs des objets à supprimer
@@ -120,16 +161,6 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
                 {
                     // Si l'agent est null, marquez l'objet pour suppression
                     objectsToRemove.Add(obj.GetInstanceID());
-                }
-
-                if (modeBaliseVerif == false)
-                {
-                    if (obj.GetComponent<Sci_Individu_Gnip>() != null)
-                    {
-                        // Appeler Follow() peut lancer une NullReferenceException si sciIndividu est null
-                        obj.gameObject.GetComponent<Sci_Individu_Gnip>().ChangeState(Sci_Individu_Gnip.State.Follow);
-                        //other.gameObject.GetComponent<Sci_PlayerController_Gnip>().modeBaliseVerif == true
-                    }
                 }
             }
         }

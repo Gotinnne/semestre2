@@ -60,15 +60,23 @@ public class Sci_Individu_Gnip : MonoBehaviour
             followVerif = false;
             baliseVerif = false;
         }
-        if (other.gameObject.name == "Balise_" + this.gameObject.tag || other.gameObject.name == "Player_" + this.gameObject.tag && other.gameObject.GetComponent<Sci_PlayerController_Gnip>().modeBaliseVerif == true)
+        else if (ennemiToAttack == null && targetEnnemiVerif == true)
+        {
+
+        }
+        if (other.gameObject.tag == "Balise_" + this.gameObject.tag)
         {
             baliseVerif = true;
         }
-        else
+        if(other.gameObject.name == "Player_" + this.gameObject.tag && other.gameObject.GetComponent<Sci_PlayerController_Gnip>().modeBaliseVerif == true)
+        {
+            baliseVerif = true;
+        }
+        if (other.gameObject.name == "Player_" + this.gameObject.tag && other.gameObject.GetComponent<Sci_PlayerController_Gnip>().modeBaliseVerif == false)
         {
             baliseVerif = false;
         }
-        if(agent.remainingDistance <= distanceSpawnerEnnemy && currentState == State.Follow && other.gameObject.name == exit.name)
+        if (agent.remainingDistance <= distanceSpawnerEnnemy && currentState == State.Follow && other.gameObject.name == exit.name)
         {
             spawnerIsNear = true;
             ennemiToAttack = exit;
@@ -76,10 +84,10 @@ public class Sci_Individu_Gnip : MonoBehaviour
     }
 
     public void OnDrawGizmos()
-        {
+    {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(this.transform.position, distanceAttaque);
-        }
+    }
 
     void Update()
     {
@@ -192,7 +200,7 @@ public class Sci_Individu_Gnip : MonoBehaviour
         {
             ChangeState(State.Follow);
         }
-        if(targetEnnemiVerif == true)
+        if (targetEnnemiVerif == true)
         {
             ChangeState(State.Attack);
         }
@@ -226,13 +234,16 @@ public class Sci_Individu_Gnip : MonoBehaviour
         if(targetEnnemiVerif == true)
         {
             timer = timer + Time.deltaTime;
-            agent.isStopped = true;
-            GameObject EnnemiGameObject = ennemiToAttack;
-            Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
-            if (timer >= maxTimer) 
+            if(distanceAttaque >= agent.remainingDistance)
             {
-                healthComponent.InflictDgt(dgtMinion);
-                timer = 0;
+                agent.isStopped = true;
+                GameObject EnnemiGameObject = ennemiToAttack;
+                Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
+                if (timer >= maxTimer)
+                {
+                    healthComponent.InflictDgt(dgtMinion);
+                    timer = 0;
+                }
             }
         }
     }
