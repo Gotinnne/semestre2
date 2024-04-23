@@ -81,24 +81,24 @@ public class Sci_Health_Gnip : MonoBehaviour
     }
     public void InflictDgt(float Dgt)
     {
-        shield = shield - Dgt;
-        if(shield < 0)
+        if(shieldActif == true)
         {
-            health = health + shield;
-            shieldActif = false;
-            UpdateHealthBar();
-        }
-        else if (shield == 0)
-        {
-            if(shieldActif == false)
+            shield = shield - Dgt;
+            if (shield < 0)
             {
-                health = health - Dgt;
+                health = health + shield;
+                shieldActif = false;
                 UpdateHealthBar();
             }
-            else if (shieldActif == true)
+            else if (shield == 0)
             {
                 shieldActif = false;
             }
+        }
+        else if (shieldActif == false)
+        {
+            health = health - Dgt;
+            UpdateHealthBar();
         }
     }
     public void UpdateHealthBar()

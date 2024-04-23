@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sci_Balise_Attaque_Gnip : MonoBehaviour
 {
-    private Dictionary<int, GameObject> objectsInTrigger = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> objetsBoosted = new Dictionary<int, GameObject>();
+
+    //timer temps restant balise
+    private float timeRemaining = 0;
+    public float maxTime;
 
     //couleur balise
     public enum TypeAgentBalise
@@ -13,32 +19,86 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
     };
     public TypeAgentBalise BaliseTag;
 
-    void Start()
-    {
-        
-    }
+    private Sci_Individu_Gnip scriptIndividu;
+    public int oldAtk = 1;
+    public int oldPlayerAtk = 1;
+    public int boostAtk = 1;
 
-    void Update()
-    {
-        
-    }
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("entrer");
         if (other.gameObject.tag == BaliseTag.ToString())
         {
-            if (!objectsInTrigger.ContainsKey(other.GetInstanceID()))
+            Debug.Log("Balise tag");
+            if (!objetsBoosted.ContainsKey(other.GetInstanceID()))
             {
-                objectsInTrigger.Add(other.GetInstanceID(), other.gameObject);
+                Debug.Log("dico");
+                objetsBoosted.Add(other.GetInstanceID(), other.gameObject);
+                scriptIndividu = other.GetComponent<Sci_Individu_Gnip>();
+                if (scriptIndividu != null)
+                {
+                    Debug.Log("null ?");
+                    if (other.gameObject.tag == BaliseTag.ToString() && other.gameObject.name == "Player")
+                    {
+                        if (scriptIndividu.dgtMinion != (oldPlayerAtk + boostAtk))
+                        {
+                            oldPlayerAtk = scriptIndividu.dgtMinion;
+                            scriptIndividu.dgtMinion = (oldPlayerAtk + boostAtk);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("pas player");
+                        Debug.Log(other.gameObject);
+                        if (scriptIndividu.dgtMinion >= (oldAtk + boostAtk))
+                        {
+                            Debug.Log(scriptIndividu.dgtMinion);
+                            oldAtk = scriptIndividu.dgtMinion;
+                            scriptIndividu.dgtMinion = (oldAtk + boostAtk);
+                        }
+                    }
+                }
             }
         }
     }
-
     void OnTriggerExit(Collider other)
     {
         //permet d'arreter set destination si individu sort de la zone
-        if (objectsInTrigger.ContainsKey(other.GetInstanceID()))
+        if (objetsBoosted.ContainsKey(other.GetInstanceID()))
         {
-            objectsInTrigger.Remove(other.GetInstanceID());
+            objetsBoosted.Remove(other.GetInstanceID());
+            scriptIndividu = other.GetComponent<Sci_Individu_Gnip>();
+            if (scriptIndividu != null)
+            {
+                if (other.gameObject.tag == BaliseTag.ToString() && other.gameObject.name == "Player")
+                {
+                    if (scriptIndividu.dgtMinion == (oldPlayerAtk + boostAtk))
+                    {
+                        scriptIndividu.dgtMinion = oldPlayerAtk;
+                    }
+                }
+                else
+                {
+                    if (scriptIndividu.dgtMinion != (oldAtk + boostAtk))
+                    {
+                        scriptIndividu.dgtMinion = oldAtk;
+                        Debug.Log("retour atk");
+                    }
+                }
+            }
         }
+    }
+    void Update()
+    {
+        timeRemaining = timeRemaining + Time.deltaTime;
+        if (timeRemaining >= maxTime)
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(this.transform.position, 5);
     }
 }

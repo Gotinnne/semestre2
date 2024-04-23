@@ -17,7 +17,7 @@ public class Sci_Individu_Gnip : MonoBehaviour
     public Vector3 target;
     public bool followVerif;
 
-    public float dgtMinion;
+    public int dgtMinion;
     public float timer;
     public float maxTimer = 2;
     public float distanceAttaque = 2;
