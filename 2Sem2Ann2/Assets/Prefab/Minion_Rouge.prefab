@@ -148,7 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 2
+  maxHealth: 3
+  shield: 0
+  shieldActif: 0
   Spawner: {fileID: 0}
   maxTimerSpawn: 0
   timerSpawn: 0
@@ -170,7 +172,7 @@ MonoBehaviour:
   exit: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   followVerif: 0
-  dgtMinion: 0.5
+  dgtMinion: 1
   timer: 0
   maxTimer: 2
   distanceAttaque: 1
