@@ -228,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af929a172ce7294a9acca73ce7f5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {fileID: 1974495408962843253}
   maxTimePing: 2
   maxTime: 20
+  destination: {fileID: 1974495408962843253}
   distanceDestination: 1
+  BaliseTag: 0

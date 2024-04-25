@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0bf317e494919488a3d8b5b2ba2d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimeRegen: 5
+  maxTimeRegen: 2
   maxTime: 20
   BaliseTag: 0
   amountRegenHealth: 0.5

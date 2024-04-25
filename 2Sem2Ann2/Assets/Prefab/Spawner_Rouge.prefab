@@ -35,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 921640477678249994}
+  - {fileID: 4390726427307707829}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2436819000247766842
@@ -52,7 +53,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261796794397149689}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -121,14 +122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: {fileID: 3880380468315793965, guid: 845cf51e75145124da9dbf0bc1086712, type: 3}
+  Timer: 0
   timeBetweenSpawn: 1
+  timerVague: 0
   maxTimerVague: 10
-  ColoursList:
-  - {r: 1, g: 0.35075077, b: 0.2924527, a: 0}
-  - {r: 1, g: 0.27102005, b: 0.19433957, a: 0}
-  - {r: 1, g: 0.048283897, b: 0, a: 0}
-  - {r: 0.7056604, g: 0.029585928, b: 0, a: 0}
-  - {r: 0.4792453, g: 0.008337289, b: 0, a: 0}
+  compteurMinions: 0
   compteurMinionsMax: 2
 --- !u!114 &7886842407870979230
 MonoBehaviour:
@@ -257,3 +255,153 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &4279623685643823710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4632235214934874485}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -3.7493994e-33
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      propertyPath: m_Name
+      value: Nid spawner rouge
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3125989520591019442}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3622018384536044448}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7639497156285314191}
+  m_SourcePrefab: {fileID: 100100000, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+--- !u!1 &4009662448484800271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+  m_PrefabInstance: {fileID: 4279623685643823710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3125989520591019442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009662448484800271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6054735e8ddb540b525cdedb475a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawn: {fileID: 0}
+  Timer: 0
+  timeBetweenSpawn: 1
+  timerVague: 0
+  maxTimerVague: 10
+  compteurMinions: 0
+  compteurMinionsMax: 2
+--- !u!135 &3622018384536044448
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009662448484800271}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5.8066072
+  m_Center: {x: 0.40529203, y: 0.25971222, z: -0.22225738}
+--- !u!114 &7639497156285314191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009662448484800271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665a91924e4c1bd4ca9f75d51a3b1c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  maxHealth: 50
+  shield: 0
+  shieldActif: 0
+  Spawner: {fileID: 3125989520591019442}
+  maxTimerSpawn: 0
+  timerSpawn: 0
+  maxTimerPlayer: 0
+  timerPlayer: 0
+  lenghtHealthBar: 5
+--- !u!4 &4390726427307707829 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
+  m_PrefabInstance: {fileID: 4279623685643823710}
+  m_PrefabAsset: {fileID: 0}

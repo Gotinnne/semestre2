@@ -17,10 +17,6 @@ public class Sci_Balise_Bouclier_Gnip : MonoBehaviour
     private float shieldRemaining;
     public float numberOfShield;
 
-    //destination balise
-    public Transform destination;
-    public float distanceDestination = 2;
-
     //couleur balise
     public enum TypeAgentBalise
     {
