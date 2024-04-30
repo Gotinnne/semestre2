@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4898391642959271940}
   - component: {fileID: 7557433322407625968}
   - component: {fileID: 7886842407870979230}
+  - component: {fileID: 4617221701337971385}
   m_Layer: 0
   m_Name: Spawner_Rouge
   m_TagString: spawner
@@ -128,6 +129,27 @@ MonoBehaviour:
   maxTimerPlayer: 0
   timerPlayer: 0
   lenghtHealthBar: 5
+--- !u!65 &4617221701337971385
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261796794397149689}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6560887037946369386
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,84 +322,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3125989520591019442}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3622018384536044448}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7639497156285314191}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
---- !u!1 &4009662448484800271 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}
-  m_PrefabInstance: {fileID: 4279623685643823710}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3125989520591019442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4009662448484800271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d6054735e8ddb540b525cdedb475a14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
-  Timer: 0
-  timeBetweenSpawn: 1
-  timerVague: 0
-  maxTimerVague: 10
-  compteurMinions: 0
-  compteurMinionsMax: 2
---- !u!135 &3622018384536044448
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4009662448484800271}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5.8066072
-  m_Center: {x: 0.40529203, y: 0.25971222, z: -0.22225738}
---- !u!114 &7639497156285314191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4009662448484800271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665a91924e4c1bd4ca9f75d51a3b1c94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 50
-  maxHealth: 50
-  shield: 0
-  shieldActif: 0
-  Spawner: {fileID: 3125989520591019442}
-  maxTimerSpawn: 0
-  timerSpawn: 0
-  maxTimerPlayer: 0
-  timerPlayer: 0
-  lenghtHealthBar: 5
 --- !u!4 &4390726427307707829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5860ec02b558c1e4cb1e9d4574bce073, type: 3}

@@ -15,7 +15,7 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
 
     //Pose balise
     private bool timeBaliseVerif;
-    public KeyCode keyPoseBalise = KeyCode.E;
+    public KeyCode keyPoseBalise = KeyCode.A;
     public GameObject Balise1;
     public GameObject Balise2;
     public GameObject Balise3;
@@ -35,6 +35,14 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
     //timer Mode balise
     private float timePing = 0;
     public float maxTimePing;
+
+    //attack
+    public KeyCode Attack = KeyCode.E;
+    public int multiplierAttack = 0;
+    public bool canAttack;
+
+
+
     public enum TypeAgentBalise
     {
         Bleu, Rouge
@@ -77,7 +85,10 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             timeBalise = 0;
             timeBaliseVerif = true;
         }
+        if (Input.GetKeyDown(Attack))
+        {
 
+        }
 
         if (Input.GetKeyDown("1"))
         {

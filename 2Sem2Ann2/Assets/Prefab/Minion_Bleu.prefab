@@ -172,7 +172,7 @@ MonoBehaviour:
   exit: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   followVerif: 0
-  dgtMinion: 0
+  dgtMinion: 1
   timer: 0
   maxTimer: 2
   distanceAttaque: 1

@@ -3,32 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_balise_bouclier_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_balise_bouclier_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|c:\\users\\gotinne\\desktop\\semestre2\\2sem2ann2\\assets\\sci_gnip\\sci_nomminion_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_nomminion_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|c:\\users\\gotinne\\desktop\\semestre2\\2sem2ann2\\assets\\sci_gnip\\sci_balise_attaque_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_playercontroller_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_playercontroller_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_balise_attaque_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_balise_attaque_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_health_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_health_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_balise_regen_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_balise_regen_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_individu_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_individu_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_balise_regen_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_balise_regen_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_spawn_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_spawn_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_playercontroller_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_playercontroller_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|c:\\users\\gotinne\\desktop\\semestre2\\2sem2ann2\\assets\\sci_gnip\\sci_balise_bouclier_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_balise_bouclier_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\assets\\sci_gnip\\sci_health_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10DAAC46-E46B-1963-1E14-414D9301D94D}|Assembly-CSharp.csproj|solutionrelative:assets\\sci_gnip\\sci_health_gnip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,23 +42,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "Sci_NomMinion_Gnip.cs",
+              "DocumentMoniker": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_NomMinion_Gnip.cs",
+              "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_NomMinion_Gnip.cs",
+              "ToolTip": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_NomMinion_Gnip.cs",
+              "RelativeToolTip": "Assets\\Sci_Gnip\\Sci_NomMinion_Gnip.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-30T09:53:28.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Sci_Balise_Regen_Gnip.cs",
               "DocumentMoniker": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Balise_Regen_Gnip.cs",
               "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_Balise_Regen_Gnip.cs",
               "ToolTip": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Balise_Regen_Gnip.cs",
               "RelativeToolTip": "Assets\\Sci_Gnip\\Sci_Balise_Regen_Gnip.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAANAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-10T09:42:52.969Z"
+              "WhenOpened": "2024-04-10T09:42:52.969Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Sci_Balise_Bouclier_Gnip.cs",
               "DocumentMoniker": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Balise_Bouclier_Gnip.cs",
               "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_Balise_Bouclier_Gnip.cs",
@@ -67,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Sci_Health_Gnip.cs",
               "DocumentMoniker": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Health_Gnip.cs",
               "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_Health_Gnip.cs",
@@ -79,13 +97,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Sci_Balise_Attaque_Gnip.cs",
               "DocumentMoniker": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Balise_Attaque_Gnip.cs",
               "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_Balise_Attaque_Gnip.cs",
               "ToolTip": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Balise_Attaque_Gnip.cs",
               "RelativeToolTip": "Assets\\Sci_Gnip\\Sci_Balise_Attaque_Gnip.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAQwA4AAAAAAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-30T13:43:46.821Z",
               "EditorCaption": ""
@@ -98,33 +116,36 @@
               "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_Spawn_Gnip.cs",
               "ToolTip": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Spawn_Gnip.cs",
               "RelativeToolTip": "Assets\\Sci_Gnip\\Sci_Spawn_Gnip.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAwBgAAAA2AAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAwBgAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T22:00:47.896Z"
+              "WhenOpened": "2024-03-04T22:00:47.896Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Sci_Individu_Gnip.cs",
               "DocumentMoniker": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Individu_Gnip.cs",
               "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_Individu_Gnip.cs",
               "ToolTip": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_Individu_Gnip.cs",
               "RelativeToolTip": "Assets\\Sci_Gnip\\Sci_Individu_Gnip.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEAAAAAAAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwLUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T22:00:48.044Z"
+              "WhenOpened": "2024-03-04T22:00:48.044Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Sci_PlayerController_Gnip.cs",
               "DocumentMoniker": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_PlayerController_Gnip.cs",
               "RelativeDocumentMoniker": "Assets\\Sci_Gnip\\Sci_PlayerController_Gnip.cs",
               "ToolTip": "C:\\Users\\Gotinne\\Desktop\\semestre2\\2Sem2Ann2\\Assets\\Sci_Gnip\\Sci_PlayerController_Gnip.cs",
               "RelativeToolTip": "Assets\\Sci_Gnip\\Sci_PlayerController_Gnip.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAkwKMAAAARAAAA",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAkwFkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T22:00:48.05Z"
+              "WhenOpened": "2024-03-04T22:00:48.05Z",
+              "EditorCaption": ""
             }
           ]
         }

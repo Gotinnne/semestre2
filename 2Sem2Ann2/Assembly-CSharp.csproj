@@ -78,6 +78,7 @@
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_MultiPath\Sci_Var_MultiPath_Individu.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_PlayerController.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_NomMinion_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_RayCast.cs" />
   </ItemGroup>
   <ItemGroup>

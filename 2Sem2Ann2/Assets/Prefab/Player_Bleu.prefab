@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 7591870175944430481}
   - component: {fileID: 1485786446338779622}
   - component: {fileID: 2812140098578639117}
+  - component: {fileID: 2781154929583811855}
   m_Layer: 0
   m_Name: Player_Bleu
   m_TagString: Bleu
@@ -340,6 +341,9 @@ MonoBehaviour:
   distanceDestination: 2
   modeBaliseVerif: 0
   maxTimePing: 0
+  Attack: 101
+  multiplierAttack: 0
+  canAttack: 0
   BaliseTag: 0
   choixBalise: 0
 --- !u!114 &2812140098578639117
@@ -364,6 +368,20 @@ MonoBehaviour:
   maxTimerPlayer: 0
   timerPlayer: 0
   lenghtHealthBar: 5
+--- !u!114 &2781154929583811855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7864641159601694305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a24b3087d20cf4fa9889609b2c22f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNom: 114
+  PlayerController: {fileID: 1485786446338779622}
 --- !u!1001 &8352879137564454327
 PrefabInstance:
   m_ObjectHideFlags: 0
