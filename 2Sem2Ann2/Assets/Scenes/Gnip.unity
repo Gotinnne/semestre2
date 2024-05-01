@@ -248,6 +248,22 @@ PrefabInstance:
       propertyPath: m_ReceiveShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6487418899003858672, guid: 69f3e9a46836098499e109b27dec3819, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487418899003858672, guid: 69f3e9a46836098499e109b27dec3819, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.9339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487418899003858672, guid: 69f3e9a46836098499e109b27dec3819, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.7468987
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487418899003858672, guid: 69f3e9a46836098499e109b27dec3819, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.629984
+      objectReference: {fileID: 0}
     - target: {fileID: 7864641159601694305, guid: 69f3e9a46836098499e109b27dec3819, type: 3}
       propertyPath: m_Name
       value: Player_Bleu
