@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 7076067660513557599}
   - component: {fileID: 6886249102892896024}
   - component: {fileID: 4979982696777101595}
+  - component: {fileID: -6109760905541178720}
   m_Layer: 0
   m_Name: Player_Rouge
   m_TagString: Rouge
@@ -248,18 +249,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   direction: {x: 0, y: 0, z: 0}
-  keyPoseBalise: 101
-  Balise1: {fileID: 6726755270018408345, guid: 5d625c4229fcadd4eaedff424df26dc0, type: 3}
+  keyPoseBalise: 97
+  Balise1: {fileID: 6726755270018408345, guid: 854bbc0d8154360488c8e49ed909a8ac, type: 3}
   Balise2: {fileID: 0}
   Balise3: {fileID: 0}
-  Balise4: {fileID: 0}
   maxTimeBalise: 10
   keyModeBalise: 102
   destination: {fileID: 7367069445219637998}
   distanceDestination: 2
   modeBaliseVerif: 0
   maxTimePing: 0
-  BaliseTag: 0
+  Attack: 101
+  multiplierAttack: 0
+  canAttack: 0
+  dgtPlayer: 0.5
+  WhoAttack: 0
+  BaliseTag: 1
   choixBalise: 0
 --- !u!114 &4979982696777101595
 MonoBehaviour:
@@ -283,6 +288,20 @@ MonoBehaviour:
   maxTimerPlayer: 0
   timerPlayer: 0
   lenghtHealthBar: 5
+--- !u!114 &-6109760905541178720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141658916900229814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e46c2ab20d8c646ac446b401f0516e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNom: 114
+  PlayerController: {fileID: 6886249102892896024}
 --- !u!1 &1597502732596676610
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,7 +50,6 @@ public class Sci_Individu_Gnip : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         ChangeState(State.Follow);
     }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == WhoAttack.ToString() && targetEnnemiVerif == false && spawnerIsNear == false)
@@ -236,7 +235,7 @@ public class Sci_Individu_Gnip : MonoBehaviour
             timer = timer + Time.deltaTime;
             if(distanceAttaque >= agent.remainingDistance)
             {
-                agent.isStopped = true;
+
                 GameObject EnnemiGameObject = ennemiToAttack;
                 Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
                 if (timer >= maxTimer)
@@ -244,6 +243,11 @@ public class Sci_Individu_Gnip : MonoBehaviour
                     healthComponent.InflictDgt(dgtMinion);
                     timer = 0;
                 }
+                /*if(Vector3.Distance(EnnemiGameObject.transform.position,this.transform.position) > distanceAttaque)
+                {
+                    agent.isStopped = false; 
+                    ChangeState(State.Follow);
+                }*/ 
             }
         }
     }

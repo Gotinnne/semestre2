@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 8693826365184191520}
   - component: {fileID: 5078229118465876442}
   - component: {fileID: 844260646388374639}
-  - component: {fileID: 2600211454926201165}
   m_Layer: 0
-  m_Name: Balise_Bleu_Bouclier
+  m_Name: Balise_Attaque
   m_TagString: Balise_Bleu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,22 +104,6 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
-  m_Height: 2
+  m_Height: 7.144921
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2600211454926201165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3302269091762833713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f334f33e7b1c249bc576abb3232b3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTimePing: 0
-  numberOfShield: 10
-  BaliseTag: 0
-  amountOfHealthFromShield: 2

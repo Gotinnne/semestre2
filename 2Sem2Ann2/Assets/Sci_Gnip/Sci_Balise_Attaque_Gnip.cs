@@ -26,18 +26,14 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("entrer");
         if (other.gameObject.tag == BaliseTag.ToString())
         {
-            Debug.Log("Balise tag");
             if (!objetsBoosted.ContainsKey(other.GetInstanceID()))
             {
-                Debug.Log("dico");
                 objetsBoosted.Add(other.GetInstanceID(), other.gameObject);
                 scriptIndividu = other.GetComponent<Sci_Individu_Gnip>();
                 if (scriptIndividu != null)
                 {
-                    Debug.Log("null ?");
                     if (other.gameObject.tag == BaliseTag.ToString() && other.gameObject.name == "Player")
                     {
                         if (scriptIndividu.dgtMinion != (oldPlayerAtk + boostAtk))
@@ -48,7 +44,6 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("pas player");
                         Debug.Log(other.gameObject);
                         if (scriptIndividu.dgtMinion >= (oldAtk + boostAtk))
                         {

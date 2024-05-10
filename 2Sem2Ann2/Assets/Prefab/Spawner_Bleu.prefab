@@ -300,35 +300,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 742faac98af56e449ad53f57adca7b9b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5980199324501274051}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 742faac98af56e449ad53f57adca7b9b, type: 3}
---- !u!1 &414980663327860684 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 742faac98af56e449ad53f57adca7b9b, type: 3}
-  m_PrefabInstance: {fileID: 649406094981798557}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5980199324501274051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414980663327860684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d6054735e8ddb540b525cdedb475a14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
-  Timer: 0
-  timeBetweenSpawn: 0
-  timerVague: 0
-  maxTimerVague: 0
-  compteurMinions: 0
-  compteurMinionsMax: 0
 --- !u!4 &1047542224606231926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 742faac98af56e449ad53f57adca7b9b, type: 3}

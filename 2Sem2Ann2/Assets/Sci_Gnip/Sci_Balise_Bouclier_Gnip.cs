@@ -9,9 +9,6 @@ using UnityEngine.AI;
 public class Sci_Balise_Bouclier_Gnip : MonoBehaviour
 {
     private Dictionary<int, GameObject> objectsInTrigger = new Dictionary<int, GameObject>();
-    //timer Ping balise
-    private float timePing = 0;
-    public float maxTimePing;
 
     //nombre de shield restant
     private float shieldRemaining;
