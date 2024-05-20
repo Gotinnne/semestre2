@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,7 +14,6 @@ public class Sci_Health_Gnip : MonoBehaviour
     public float shield;
     public bool shieldActif;
 
-    public Sci_Spawn_Gnip Spawner;
     public float maxTimerSpawn;
     public float timerSpawn;
 
@@ -22,34 +22,48 @@ public class Sci_Health_Gnip : MonoBehaviour
 
     public float lenghtHealthBar = 5;
     private float lenghtHealthBarMax;
+    public GameObject Barre;
     void Start()
     {
+        if (this.name == "Queen_Bleu" || this.name == "Queen_Rouge")
+        {
+
+        }
+        else
+        {
+            // Recherche de "Barre de vie"
+            healthBar = transform.Find("Barre de vie");
+            if (healthBar == null)
+            {
+                Debug.LogError("Objet 'Barre de vie'  pas trouvé");
+            }
+        }
+
         health = maxHealth;
         lenghtHealthBarMax = lenghtHealthBar;
-        // Recherche de "Barre de vie"
-        healthBar = transform.Find("Barre de vie");
-        if (healthBar == null)
-        {
-            Debug.LogError("Objet 'Barre de vie'  pas trouvé");
-        }
-        if (!gameObject.CompareTag("spawner"))
-        {
-            Spawner = GameObject.Find("Spawner_" + this.gameObject.tag).GetComponent<Sci_Spawn_Gnip>();
-        }
+
     }
     void Update()
     {
-        //set taille taille healthBar (soucis: utilisation LocalScale)
-        healthBar.localScale = new Vector3( lenghtHealthBar, 0.3f, 0.3f);
+        if (this.name == "Queen_Bleu" || this.name == "Queen_Rouge")
+        {
+            UpdateHealthBar();
+            Barre.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lenghtHealthBar);
+        }
+        else if(this.name != "Queen_Bleu" && this.name != "Queen_Rouge" && this.name != "Spawner_Rouge_1" && this.name != "Spawner_Rouge_2" && this.name != "Spawner_Bleu_1" && this.name != "Spawner_Bleu_2")
+        {
+            UpdateHealthBar();
+            Barre.GetComponent<Transform>().localScale = new Vector3(lenghtHealthBar, 1, 1);
+        }
 
         //vérification mort de l'entité
         if (health <= 0) 
-        {   
-            if (gameObject.name == "Spawner_Rouge" || gameObject.name == "Spawner_Bleu")
+        {
+            if ( gameObject.name == "Spawner_Rouge" || gameObject.name == "Spawner_Bleu")
             {
+                Debug.Log("destroy spawner");
                 //si entité un spawner désactiver durant timer
                 this.gameObject.GetComponent<Collider>().enabled = false;
-                this.gameObject.GetComponent<Renderer>().enabled = false;
                 this.gameObject.GetComponent<Sci_Spawn_Gnip>().enabled = false;
                 timerSpawn = Time.deltaTime + timerSpawn;
                 if(timerSpawn >= maxTimerSpawn)
@@ -57,12 +71,12 @@ public class Sci_Health_Gnip : MonoBehaviour
                     timerSpawn = 0;
                     health = maxHealth;
                     this.gameObject.GetComponent<Collider>().enabled = true;
-                    this.gameObject.GetComponent<Renderer>().enabled = true;
                     this.gameObject.GetComponent<Sci_Spawn_Gnip>().enabled = true;
                 }
             }
             if (gameObject.name == "Player_Rouge" || gameObject.name == "Player_Bleu")
             {
+                Debug.Log("Destroy player");    
                 //si entité un spawner désactiver durant timer
 
                 timerPlayer = Time.deltaTime + timerPlayer;
@@ -73,7 +87,7 @@ public class Sci_Health_Gnip : MonoBehaviour
                     maxTimerPlayer = maxTimerPlayer + 5;
                 }
             }
-            else
+            if(gameObject.name != "Spawner_Rouge" && gameObject.name != "Spawner_Bleu" && gameObject.name != "Player_Rouge" && gameObject.name != "Player_Bleu")
             {
                 Destroy(gameObject);
             }

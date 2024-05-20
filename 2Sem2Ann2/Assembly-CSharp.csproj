@@ -64,6 +64,8 @@
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Attaque_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_LaunchIdle.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_CamVisibility\Sci_RayCast_Var_CamVisibility.cs" />
+    <Compile Include="Assets\SmoothFollow1.cs" />
+    <Compile Include="Assets\SmoothFollow.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Spawn_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Bouclier_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_Cam\Sci_RayCast_Var_Cam.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Exit.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_MultiPath\Sci_Var_MultiPath_Individu.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Gnip.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_Go_Queen_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_PlayerController.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_NomMinion_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_RayCast.cs" />
@@ -1041,6 +1044,10 @@
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
