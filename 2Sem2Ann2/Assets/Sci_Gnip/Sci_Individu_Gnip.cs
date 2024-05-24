@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
+using static Sci_PlayerController_Gnip;
 public enum TypeAgent
 {
     Bleu, Rouge
@@ -29,6 +30,7 @@ public class Sci_Individu_Gnip : MonoBehaviour
 
     public bool baliseVerif;
 
+    public GameObject Queen;
     public bool goForTheQueen;
     public bool queenIsNear;
     public bool spawnerIsNear;
@@ -51,17 +53,14 @@ public class Sci_Individu_Gnip : MonoBehaviour
 
     void Start()
     {
+        Queen = GameObject.Find("Queen_" + WhoAttack.ToString());
         exit = ExitChosen;
-        if ( exit == null)
-        {
-            exit = GameObject.Find("Queen_" + WhoAttack.ToString());
-        }
         agent = GetComponent<NavMeshAgent>();
         ChangeState(State.Follow);
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == WhoAttack.ToString() && targetEnnemiVerif == false && spawnerIsNear == false)
+        if (other.gameObject.tag == WhoAttack.ToString() && targetEnnemiVerif == false && spawnerIsNear == false && queenIsNear == false)
         {
             ennemiToAttack = other.gameObject;
             targetEnnemiVerif = true;
@@ -84,9 +83,22 @@ public class Sci_Individu_Gnip : MonoBehaviour
         {
             baliseVerif = false;
         }
-        if (agent.remainingDistance <= distanceSpawnerEnnemy && currentState == State.Follow && other.gameObject.name == exit.name)
+        if (ExitChosen.GetComponent<Sci_Health_Gnip>().BoolSpawn == false && agent.remainingDistance <= distanceSpawnerEnnemy && other.gameObject.name == ExitChosen.name)
+        {
+            goForTheQueen = true;
+        }
+        if (ExitChosen.GetComponent<Sci_Health_Gnip>().BoolSpawn == false)
+        {
+            spawnerIsNear = false;
+        }
+        if (ExitChosen.GetComponent<Sci_Health_Gnip>().BoolSpawn == true && agent.remainingDistance <= distanceSpawnerEnnemy && other.gameObject.name == ExitChosen.name)
         {
             spawnerIsNear = true;
+            ennemiToAttack = exit;
+        }
+        if (agent.remainingDistance <= distanceSpawnerEnnemy && goForTheQueen == true && other.gameObject.name == Queen.name)
+        {
+            queenIsNear = true;
             ennemiToAttack = exit;
         }
     }
@@ -99,13 +111,13 @@ public class Sci_Individu_Gnip : MonoBehaviour
 
     void Update()
     {
-        if(exit != null && goForTheQueen == false)
+        if(ExitChosen.GetComponent<Sci_Health_Gnip>().BoolSpawn == true && goForTheQueen == false)
         {
             exit = ExitChosen;
         }
-        else if(exit == null && goForTheQueen == false)
+        else if(goForTheQueen == true)
         {
-            exit = GameObject.Find("Queen_" + WhoAttack.ToString());
+            exit = Queen;
         }
         //Update State
         switch (currentState)
@@ -124,7 +136,6 @@ public class Sci_Individu_Gnip : MonoBehaviour
                 break;
         }
     }
-
     public void ChangeState(State newState)
     {
         //Exit current State
@@ -179,36 +190,19 @@ public class Sci_Individu_Gnip : MonoBehaviour
         }
         if (targetEnnemiVerif == true)
         {
-            ChangeState(State.Attack);
             targetEnnemiVerif = false;
+            ChangeState(State.Attack);
         }
-        if (goForTheQueen == true)
+        if(goForTheQueen == true)
         {
-            spawnerIsNear = false;
             ChangeState(State.GoQueen);
         }
         if (spawnerIsNear == true)
         {
-            timer = timer + Time.deltaTime;
-            agent.isStopped = true;
             GameObject EnnemiGameObject = ennemiToAttack;
             Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
-            if (timer >= maxTimer)
-            {
-                if(ennemiToAttack != null)
-                {
-                    healthComponent.InflictDgt(dgtMinion);
-                    timer = 0;
-                }
-                if (ennemiToAttack == null)
-                {
-                    timer = 0;
-                    agent.isStopped = false;
-                    goForTheQueen = true;
-                    exit = GameObject.Find("Queen_" + WhoAttack.ToString());
-                    ChangeState(State.Follow);
-                }
-            }
+            targetEnnemiVerif = true;
+            ChangeState(State.Attack);
         }
         if (target == null)
         {
@@ -260,8 +254,18 @@ public class Sci_Individu_Gnip : MonoBehaviour
     }
     private void UpdateAttack()
     {
-
-        if (ennemiToAttack == null || spawnerIsNear == true || Vector3.Distance(ennemiToAttack.transform.position,this.transform.position) >= distancestopatkplayer)
+        //ne fonctionne pas
+        if (ennemiToAttack != null && ennemiToAttack.GetComponent<Sci_Health_Gnip>().BoolSpawn == false)
+        {
+            exit = Queen;
+            spawnerIsNear = false;
+            ChangeState(State.Follow);
+        }
+        if(queenIsNear == true)
+        {
+            ChangeState(State.GoQueen);
+        }
+        if (ennemiToAttack == null || Vector3.Distance(ennemiToAttack.transform.position,this.transform.position) >= distancestopatkplayer)
         {
             targetEnnemiVerif = false;
             agent.isStopped = false;
@@ -277,7 +281,6 @@ public class Sci_Individu_Gnip : MonoBehaviour
             timer = timer + Time.deltaTime;
             if(distanceAttaque >= agent.remainingDistance)
             {
-
                 GameObject EnnemiGameObject = ennemiToAttack;
                 Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
                 if (timer >= maxTimer)
@@ -302,26 +305,31 @@ public class Sci_Individu_Gnip : MonoBehaviour
     #region GoQueen
     private void EnterGoQueen()
     {
-        exit = GameObject.Find("Queen_" + WhoAttack.ToString());
+        spawnerIsNear = false;
+        targetEnnemiVerif = false;
+        goForTheQueen = true;
+        exit = Queen;
         target = new Vector3(Random.Range(exit.GetComponent<Transform>().position.x - 1, exit.GetComponent<Transform>().position.x + 1), 0, exit.GetComponent<Transform>().position.z - 1);
-        exit = ennemiToAttack;
+        
     }
     private void UpdateGoQueen()
     {
+        agent.SetDestination(target);
         if (queenIsNear == true)
         {
             timer = timer + Time.deltaTime;
-            agent.isStopped = true;
+             ennemiToAttack = exit;
             GameObject EnnemiGameObject = ennemiToAttack;
             Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
             if (timer >= maxTimer)
             {
-                if (ennemiToAttack != null)
-                {
-                    healthComponent.InflictDgt(dgtMinion);
-                    timer = 0;
-                }
+                healthComponent.InflictDgt(dgtMinion);
+                timer = 0;
             }
+        }
+        if(targetEnnemiVerif == true && queenIsNear == false)
+        {
+            ChangeState(State.Attack);
         }
     }
     private void ExitGoQueen()

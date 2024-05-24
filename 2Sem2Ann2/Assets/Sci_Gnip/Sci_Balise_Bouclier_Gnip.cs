@@ -23,7 +23,15 @@ public class Sci_Balise_Bouclier_Gnip : MonoBehaviour
 
     private Sci_Health_Gnip scriptHealth;
     public float amountOfHealthFromShield;
+    //healEffect
+    public GameObject HealEffectGO;
+    public float TimeEffectmax = 0.5f;
+    private float TimerEffect = 0.0f;
+    private bool HealEffectBool = false;
 
+    public GameObject Balise1;
+    public GameObject Balise2;
+    public GameObject Balise3;
     private void Start()
     {
         shieldRemaining = numberOfShield;
@@ -40,6 +48,9 @@ public class Sci_Balise_Bouclier_Gnip : MonoBehaviour
                 {
                     if (shieldRemaining != 0)
                     {
+                        HealEffect();
+                        scriptHealth.BouclierEffect();
+                        scriptHealth.Bouclier1GO.GetComponent<SpriteRenderer>().enabled = true;
                         scriptHealth.shieldActif = true;
                         scriptHealth.shield = amountOfHealthFromShield;
                         shieldRemaining = shieldRemaining - 1;
@@ -51,12 +62,37 @@ public class Sci_Balise_Bouclier_Gnip : MonoBehaviour
 
     void Update()
     {
-        if(shieldRemaining <= 0)
+        if (HealEffectBool == true)
+        {
+            TimerEffect = TimerEffect + Time.deltaTime;
+        }
+        if (TimerEffect >= TimeEffectmax)
+        {
+            HealEffectGO.GetComponent<SpriteRenderer>().enabled = false;
+            HealEffectBool = false;
+            TimerEffect = 0;
+        }
+        if (shieldRemaining <= 0)
         {
             Destroy(gameObject);
         }
+        if (shieldRemaining > numberOfShield * 0.3)
+        {
+            Balise1.GetComponent<SpriteRenderer>().enabled = false;
+            Balise2.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (shieldRemaining > numberOfShield * 0.7)
+        {
+            Balise2.GetComponent<SpriteRenderer>().enabled = false;
+            Balise3.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
+    public void HealEffect()
+    {
+        HealEffectGO.GetComponent<SpriteRenderer>().enabled = true;
+        HealEffectBool = true;
+    }
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.black;

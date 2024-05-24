@@ -16,15 +16,28 @@ public class Sci_Spawn_Gnip : MonoBehaviour
     public int compteurMinions;
     public int compteurMinionsMax;
 
+    public GameObject SpawnerDetruit;
+    public GameObject SpawnerSpawn;
+
+    private void Start()
+    {
+        SpawnerDetruit.GetComponent<SpriteRenderer>().enabled = false;
+        SpawnerSpawn.GetComponent<SpriteRenderer>().enabled = false;
+    }
     void Update()
     {
         timerVague = timerVague + Time.deltaTime;
+        if(maxTimerVague * 0.5 <= timerVague)
+        {
+            SpawnerSpawn.GetComponent<SpriteRenderer>().enabled = true;
+        }
         if (maxTimerVague <= timerVague) 
         {
             if (compteurMinions == compteurMinionsMax)
             {
                 compteurMinions = 0;
                 timerVague = 0;
+                SpawnerSpawn.GetComponent<SpriteRenderer>().enabled = false;
                 return;
             }
             if (compteurMinions != compteurMinionsMax)
@@ -39,7 +52,6 @@ public class Sci_Spawn_Gnip : MonoBehaviour
                     Timer = 0;
                 }
             }
-            
         }
     }
 }

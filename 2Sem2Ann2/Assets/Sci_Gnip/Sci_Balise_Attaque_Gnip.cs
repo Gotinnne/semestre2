@@ -20,10 +20,20 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
     public TypeAgentBalise BaliseTag;
 
     private Sci_Individu_Gnip scriptIndividu;
+    private Sci_PlayerController_Gnip playerController;
     public int oldAtk = 1;
     public int oldPlayerAtk = 1;
     public int boostAtk = 1;
 
+    //healEffect
+    public GameObject HealEffectGO;
+    public float TimeEffectmax = 0.5f;
+    private float TimerEffect = 0.0f;
+    private bool HealEffectBool = false;
+
+    public GameObject Balise1;
+    public GameObject Balise2;
+    public GameObject Balise3;
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == BaliseTag.ToString())
@@ -32,25 +42,35 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
             {
                 objetsBoosted.Add(other.GetInstanceID(), other.gameObject);
                 scriptIndividu = other.GetComponent<Sci_Individu_Gnip>();
+                
+                if(scriptIndividu == null)
+                {
+                    playerController = other.GetComponent<Sci_PlayerController_Gnip>();
+                    if (scriptIndividu == null && playerController == null)
+                    {
+                        HealEffect();
+                        other.GetComponent<Sci_Health_Gnip>().DgtUpEffect();
+                        //effetqueen
+                    }
+                }
                 if (scriptIndividu != null)
                 {
-                    if (other.gameObject.tag == BaliseTag.ToString() && other.gameObject.name == "Player")
+                    oldAtk = scriptIndividu.dgtMinion;
+                    if (scriptIndividu.dgtMinion >= (oldAtk + boostAtk))
                     {
-                        if (scriptIndividu.dgtMinion != (oldPlayerAtk + boostAtk))
-                        {
-                            oldPlayerAtk = scriptIndividu.dgtMinion;
-                            scriptIndividu.dgtMinion = (oldPlayerAtk + boostAtk);
-                        }
+                        HealEffect();
+                        other.GetComponent<Sci_Health_Gnip>().DgtUpEffect();
+                        scriptIndividu.dgtMinion = (oldAtk + boostAtk);
                     }
-                    else
+                }
+                if(playerController != null)
+                {
+                    oldPlayerAtk = playerController.dgtPlayer;
+                    if (playerController.dgtPlayer != (oldPlayerAtk + boostAtk))
                     {
-                        Debug.Log(other.gameObject);
-                        if (scriptIndividu.dgtMinion >= (oldAtk + boostAtk))
-                        {
-                            Debug.Log(scriptIndividu.dgtMinion);
-                            oldAtk = scriptIndividu.dgtMinion;
-                            scriptIndividu.dgtMinion = (oldAtk + boostAtk);
-                        }
+                        HealEffect();
+                        other.GetComponent<Sci_Health_Gnip>().DgtUpEffect();
+                        playerController.dgtPlayer = (oldPlayerAtk + boostAtk);
                     }
                 }
             }
@@ -58,39 +78,71 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        
         //permet d'arreter set destination si individu sort de la zone
         if (objetsBoosted.ContainsKey(other.GetInstanceID()))
         {
             objetsBoosted.Remove(other.GetInstanceID());
             scriptIndividu = other.GetComponent<Sci_Individu_Gnip>();
+            if (scriptIndividu == null)
+            {
+                playerController = other.GetComponent<Sci_PlayerController_Gnip>();
+            }
             if (scriptIndividu != null)
             {
-                if (other.gameObject.tag == BaliseTag.ToString() && other.gameObject.name == "Player")
+                if (scriptIndividu.dgtMinion == (oldAtk + boostAtk))
                 {
-                    if (scriptIndividu.dgtMinion == (oldPlayerAtk + boostAtk))
-                    {
-                        scriptIndividu.dgtMinion = oldPlayerAtk;
-                    }
+                    scriptIndividu.dgtMinion = oldAtk;
+                    other.GetComponent<Sci_Health_Gnip>().DgtUpEffectFalse();
                 }
-                else
+            }
+            if (playerController != null)
+            {
+                if (playerController.dgtPlayer == (oldPlayerAtk + boostAtk))
                 {
-                    if (scriptIndividu.dgtMinion != (oldAtk + boostAtk))
-                    {
-                        scriptIndividu.dgtMinion = oldAtk;
-                        Debug.Log("retour atk");
-                    }
+                    other.GetComponent<Sci_Health_Gnip>().DgtUpEffectFalse();
+                    playerController.dgtPlayer = oldPlayerAtk;
                 }
             }
         }
     }
+    
     void Update()
     {
+        if (HealEffectBool == true)
+        {
+            TimerEffect = TimerEffect + Time.deltaTime;
+        }
+        if (TimerEffect >= TimeEffectmax)
+        {
+            HealEffectGO.GetComponent<SpriteRenderer>().enabled = false;
+            HealEffectBool = false;
+            TimerEffect = 0;
+        }
         timeRemaining = timeRemaining + Time.deltaTime;
+
         if (timeRemaining >= maxTime)
         {
             Destroy(gameObject);
         }
+        if (timeRemaining > maxTime * 0.4)
+        {
+            Balise1.GetComponent<SpriteRenderer>().enabled = false;
+            Balise2.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (timeRemaining > maxTime * 0.7)
+        {
+            Balise2.GetComponent<SpriteRenderer>().enabled = false;
+            Balise3.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
+
+    public void HealEffect()
+    {
+        HealEffectGO.GetComponent<SpriteRenderer>().enabled = true;
+        HealEffectBool = true;
+    }
+
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.black;

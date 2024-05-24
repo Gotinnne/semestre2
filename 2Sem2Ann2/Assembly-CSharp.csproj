@@ -60,13 +60,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Sci_Gnip\SmoothFollow.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Individu.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Attaque_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_LaunchIdle.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_CamVisibility\Sci_RayCast_Var_CamVisibility.cs" />
-    <Compile Include="Assets\SmoothFollow1.cs" />
-    <Compile Include="Assets\SmoothFollow.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Spawn_Gnip.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_Inventaire_Gnip.cs" />
+    <Compile Include="Assets\Sci_Gnip\SmoothFollow1.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Bouclier_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_Cam\Sci_RayCast_Var_Cam.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_BaliseSpawner_Gnip.cs" />

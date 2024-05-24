@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using static Sci_Inventaire_Gnip;
 
 
 public class Sci_PlayerController_Gnip : MonoBehaviour
@@ -12,13 +13,26 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
     public float speed = 5f;
     public Vector3 direction;
     private Rigidbody rb;
+    public float rotationSpeed = 10f;
 
     //Pose balise
     private bool timeBaliseVerif;
-    public KeyCode keyPoseBalise = KeyCode.A;
     public GameObject Balise1;
     public GameObject Balise2;
     public GameObject Balise3;
+
+    //choix balise
+    public KeyCode Cb1;
+    public KeyCode Cb2;
+    public KeyCode Cb3;
+
+    public GameObject EBalise1;
+    public GameObject EBalise2;
+    public GameObject EBalise3;
+
+    public GameObject EBalise1Base;
+    public GameObject EBalise2Base;
+    public GameObject EBalise3Base;
 
     //timer Pose balise
     private float timeBalise = 0;
@@ -35,17 +49,12 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
     private float timePing = 0;
     public float maxTimePing;
 
-    //choix balise
-    public KeyCode Cb1;
-    public KeyCode Cb2;
-    public KeyCode Cb3;
-
     //attack
     public KeyCode Attack = KeyCode.E;
     public int multiplierAttack = 0;
     public bool canAttack;
     private Sci_Health_Gnip scriptHealth;
-    public float dgtPlayer;
+    public int dgtPlayer;
     public enum TypeAgent
     {
         Bleu, Rouge
@@ -58,15 +67,37 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
         Balise2,
         Balise3
     }
-    public State choixBalise;
+
+    //healEffect
+    public GameObject ModeBaliseEffectGO;
+    public float TimeEffectmax = 0.2f;
+    private float TimerEffect = 0.0f;
+    private bool ModeBaliseEffect = false;
+
+
+    public GameObject CamBleu;
+    public GameObject CamRouge;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         destination = this.gameObject.transform;
+        CamBleu = GameObject.Find("Camera_Bleu");
+        CamRouge = GameObject.Find("Camera_Rouge");
     }
     void Update()
     {
+        if (ModeBaliseEffect == true)
+        {
+            TimerEffect = TimerEffect + Time.deltaTime;
+        }
+        if (TimerEffect >= TimeEffectmax && ModeBaliseEffect == true)
+        {
+            ModeBaliseEffectGO.GetComponent<SpriteRenderer>().enabled = false;
+            ModeBaliseEffect = false;
+            TimerEffect = 0;
+        }
+
         if (Input.GetKeyDown(Attack) && canAttack == true)
         {
             List<int> objectsToRemove = new List<int>(); // Pour stocker les IDs des objets à supprimer
@@ -93,16 +124,6 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             multiplierAttack = 0;
             canAttack = false;
         }
-        if (Input.GetKeyDown(keyPoseBalise))
-        {
-            //timer et vérif pose balise
-            if (timeBalise <= maxTimeBalise && timeBaliseVerif == true)
-            {
-                PoseBalise();
-                timeBaliseVerif = false;
-                timeBalise = timeBalise + Time.deltaTime;
-            }
-        }
         //Lancer timer si balise poser
         if (timeBaliseVerif == false)
         {
@@ -112,25 +133,76 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
         if (timeBalise > maxTimeBalise)
         {
             timeBalise = 0;
+            EBalise1Base.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise2Base.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise3Base.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise1.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise2.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise3.GetComponent<SpriteRenderer>().enabled = false;
             timeBaliseVerif = true;
         }
-        if (Input.GetKeyDown(Cb1))
+        if (Input.GetKeyDown(Cb1) && timeBalise <= maxTimeBalise && timeBaliseVerif == true)
         {
-            choixBalise = State.Balise1;
+            Instantiate(Balise1, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+            timeBaliseVerif = false;
+            EBalise1.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise2.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise3.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise1Base.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise2Base.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise3Base.GetComponent<SpriteRenderer>().enabled = false;
+            timeBalise = timeBalise + Time.deltaTime;
         }
-        if (Input.GetKeyDown(Cb2))
+        if (Input.GetKeyDown(Cb2) && timeBalise <= maxTimeBalise && timeBaliseVerif == true)
         {
-            choixBalise = State.Balise2;
+            Instantiate(Balise2, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+            Balise2 = null;
+            timeBaliseVerif = false;
+            EBalise1.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise2.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise3.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise1Base.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise2Base.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise3Base.GetComponent<SpriteRenderer>().enabled = false;
+
+            if (WhoAttack.ToString() == "Rouge")
+            {
+                CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Vide;
+            }
+            if (WhoAttack.ToString() == "Bleu")
+            {
+                CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Vide;
+            }
+            timeBalise = timeBalise + Time.deltaTime;
         }
-        if (Input.GetKeyDown(Cb3))
+        if (Input.GetKeyDown(Cb3) && timeBalise <= maxTimeBalise && timeBaliseVerif == true)
         {
-            choixBalise = State.Balise3;
+            Instantiate(Balise3, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
+            Balise3 = null;
+            timeBaliseVerif = false;
+            EBalise1.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise2.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise3.GetComponent<SpriteRenderer>().enabled = true;
+            EBalise1Base.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise2Base.GetComponent<SpriteRenderer>().enabled = false;
+            EBalise3Base.GetComponent<SpriteRenderer>().enabled = false;
+
+            if (WhoAttack.ToString() == "Rouge")
+            {
+                CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Vide;
+            }
+            if (WhoAttack.ToString() == "Bleu")
+            {
+                CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Vide;
+            }
+            timeBalise = timeBalise + Time.deltaTime;
         }
 
         if (Input.GetKeyDown(keyModeBalise) && modeBaliseVerif == true)
         {
             //Mode balise desactivation
             modeBaliseVerif = false;
+
             ModeBalise();
         }
         else if (Input.GetKeyDown(keyModeBalise))
@@ -145,6 +217,7 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             timePing = timePing + Time.deltaTime;
             if(timePing > maxTimePing)
             {
+                HealEffect();
                 ModeBalise();
                 timePing = 0;
             }
@@ -152,33 +225,10 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
         // obtenir la direction vers laquelle on applique la force, Raw permet de réaliser un ".normalized"
         direction = (Vector3.right * Input.GetAxisRaw("Horizontal Player" + this.tag) + Vector3.forward * Input.GetAxisRaw("Vertical Player" + this.tag)).normalized;
         rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
-    }
-    void PoseBalise()
-    {
-        switch (choixBalise)
+        if (direction != Vector3.zero)
         {
-            case State.Balise1:
-                if (Balise1 != null)
-                {
-                    Instantiate(Balise1, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
-                }
-                break;
-            case State.Balise2:
-                if (Balise2 != null)
-                {
-                    Instantiate(Balise2, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
-                    Balise2 = null;
-
-                }
-                break;
-            case State.Balise3:
-                if(Balise3 != null)
-                {
-                    Instantiate(Balise3, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
-                    Balise3 = null;
-                    
-                }
-                break;
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
         }
     }
     void ModeBalise()
@@ -211,6 +261,13 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             objectsInTrigger.Remove(id);
         }
     }
+
+    public void HealEffect()
+    {
+        ModeBaliseEffectGO.GetComponent<SpriteRenderer>().enabled = true;
+        ModeBaliseEffect = true;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         //Objet de la couleur de la balise

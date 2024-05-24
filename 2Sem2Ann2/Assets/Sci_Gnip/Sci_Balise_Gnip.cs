@@ -28,6 +28,12 @@ public class Sci_Balise_Gnip : MonoBehaviour
     };
     public TypeAgentBalise BaliseTag;
 
+    public GameObject Balise1;
+    public GameObject Balise2;
+    public GameObject Balise3;
+    public GameObject Balise4;
+    public GameObject Balise5;
+
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == BaliseTag.ToString())
@@ -61,6 +67,26 @@ public class Sci_Balise_Gnip : MonoBehaviour
         {
             IdleBalise();
             Destroy(gameObject);
+        }
+        if (timeRemaining > maxTime * 0.2)
+        {
+            Balise1.GetComponent<SpriteRenderer>().enabled = false;
+            Balise2.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (timeRemaining > maxTime * 0.4)
+        {
+            Balise2.GetComponent<SpriteRenderer>().enabled = false;
+            Balise3.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (timeRemaining > maxTime * 0.6)
+        {
+            Balise3.GetComponent<SpriteRenderer>().enabled = false;
+            Balise4.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (timeRemaining > maxTime * 0.8)
+        {
+            Balise4.GetComponent<SpriteRenderer>().enabled = false;
+            Balise5.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     void IdleBalise()

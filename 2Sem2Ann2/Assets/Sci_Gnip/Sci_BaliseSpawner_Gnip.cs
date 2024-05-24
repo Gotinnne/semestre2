@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Sci_Inventaire_Gnip;
 
 public class Sci_BaliseSpawner_Gnip : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
     public GameObject Player;
     public GameObject lastBalise;
 
+    public GameObject CamBleu;
+    public GameObject CamRouge;
+
+    private void Start()
+    {
+        CamBleu = GameObject.Find("Camera_Bleu");
+        CamRouge = GameObject.Find("Camera_Rouge");
+    }
     void Update()
     {
         timeRemaining = timeRemaining + Time.deltaTime;
@@ -93,13 +102,17 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                     switch (choixBalise)
                     {
                         case State.BaliseAttaque:
+
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 = BaliseAttaqueBleu;
+                            CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Atk;
                             break;
                         case State.BaliseBouclier:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 = BaliseBouclierBleu;
+                            CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Bouc;
                             break;
                         case State.BaliseRegen:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 = BaliseRegenBleu;
+                            CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Regen;
                             break;
                     }
                     Destroy(lastBalise);
@@ -112,12 +125,15 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                     {
                         case State.BaliseAttaque:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 = BaliseAttaqueBleu;
+                            CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Atk;
                             break;
                         case State.BaliseBouclier:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 = BaliseBouclierBleu;
+                            CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Bouc;
                             break;
                         case State.BaliseRegen:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 = BaliseRegenBleu;
+                            CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Regen;
                             break;
                     }
                     Destroy(lastBalise);
@@ -133,12 +149,15 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                     {
                         case State.BaliseAttaque:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 = BaliseAttaqueRouge;
+                            CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Atk;
                             break;
                         case State.BaliseBouclier:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 = BaliseBouclierRouge;
+                            CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Bouc;
                             break;
                         case State.BaliseRegen:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 = BaliseRegenRouge;
+                            CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Regen;
                             break;
                     }
                     Destroy(lastBalise);
@@ -151,12 +170,15 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                     {
                         case State.BaliseAttaque:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 = BaliseAttaqueRouge;
+                            CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Atk;
                             break;
                         case State.BaliseBouclier:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 = BaliseBouclierRouge;
+                            CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Bouc;
                             break;
                         case State.BaliseRegen:
                             Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 = BaliseRegenRouge;
+                            CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Regen;
                             break;
                     }
                     Destroy(lastBalise);

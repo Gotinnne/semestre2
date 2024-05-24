@@ -12,6 +12,11 @@ public class Sci_NomMinion_Gnip : MonoBehaviour
     public Sci_PlayerController_Gnip PlayerController;
     private GameObject randomObject;
     private Timer timer;
+
+    public GameObject Level1;
+    public GameObject Level2;
+    public GameObject Level3;
+
     void Update()
     {
         if (objectsInTrigger.Count > 0 && Input.GetKeyDown(keyNom))
@@ -23,6 +28,24 @@ public class Sci_NomMinion_Gnip : MonoBehaviour
             PlayerController.multiplierAttack = PlayerController.multiplierAttack + 1;
             Destroy(randomObject);
             objectsInTrigger.Remove(MinionRan);
+        }
+        if(PlayerController.multiplierAttack == 0)
+        {
+            Level1.GetComponent<SpriteRenderer>().enabled = false;
+            Level2.GetComponent<SpriteRenderer>().enabled = false;
+            Level3.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if(PlayerController.multiplierAttack >= 1)
+        {
+            Level1.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if( PlayerController.multiplierAttack >= 2)
+        {
+            Level2.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (PlayerController.multiplierAttack >= 3)
+        {
+            Level3.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     void OnTriggerEnter(Collider other)
