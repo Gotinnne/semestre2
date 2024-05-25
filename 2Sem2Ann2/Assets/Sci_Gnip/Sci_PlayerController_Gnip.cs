@@ -48,13 +48,37 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
     //timer Mode balise
     private float timePing = 0;
     public float maxTimePing;
+    //timer utilisation mode balise
+    private float timeMB = 0;
+    public float maxMB;
 
     //attack
     public KeyCode Attack = KeyCode.E;
     public int multiplierAttack = 0;
     public bool canAttack;
     private Sci_Health_Gnip scriptHealth;
-    public int dgtPlayer;
+    public float dgtPlayer;
+    public float oldPlayerAtk;
+
+    //effet Gnom et Attaque sur le joueur
+    public GameObject GnomP0;
+    public GameObject GnomP1;
+    public GameObject GnomP2;
+    public GameObject GnomP3;
+
+    public GameObject SpriteBasePlayer;
+
+    public GameObject ZoneAttaqueEffect;
+
+    //Attaque actif et desactiver
+    public GameObject AttaqueActif;
+    public GameObject AttaqueDesactiver;
+
+    //Mode Balise Timer
+    public GameObject BaliseActif;
+    public GameObject BaliseDesactiver;
+
+
     public enum TypeAgent
     {
         Bleu, Rouge
@@ -74,16 +98,18 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
     private float TimerEffect = 0.0f;
     private bool ModeBaliseEffect = false;
 
-
     public GameObject CamBleu;
     public GameObject CamRouge;
 
     void Start()
     {
+        oldPlayerAtk = dgtPlayer;
         rb = GetComponent<Rigidbody>();
         destination = this.gameObject.transform;
         CamBleu = GameObject.Find("Camera_Bleu");
         CamRouge = GameObject.Find("Camera_Rouge");
+        AttaqueDesactiver.GetComponent<SpriteRenderer>().enabled = true;
+        AttaqueActif.GetComponent<SpriteRenderer>().enabled = false;
     }
     void Update()
     {
@@ -91,9 +117,17 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
         {
             TimerEffect = TimerEffect + Time.deltaTime;
         }
-        if (TimerEffect >= TimeEffectmax && ModeBaliseEffect == true)
+        if (TimerEffect >= TimeEffectmax)
         {
+            GnomP0.GetComponent<SpriteRenderer>().enabled = false;
+            GnomP1.GetComponent<SpriteRenderer>().enabled = false;
+            GnomP2.GetComponent<SpriteRenderer>().enabled = false;
+            GnomP3.GetComponent<SpriteRenderer>().enabled = false;
+            GnomP3.GetComponent<SpriteRenderer>().enabled = false;
+
             ModeBaliseEffectGO.GetComponent<SpriteRenderer>().enabled = false;
+            SpriteBasePlayer.GetComponent<SpriteRenderer>().enabled = true;
+            ZoneAttaqueEffect.GetComponent<SpriteRenderer>().enabled = false;
             ModeBaliseEffect = false;
             TimerEffect = 0;
         }
@@ -112,17 +146,28 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
                         if (scriptHealth != null)
                         {
                             scriptHealth.InflictDgt(dgtPlayer * multiplierAttack);
+                            dgtPlayer = oldPlayerAtk;
                         }
                     }
                 }
+            }
+            if(multiplierAttack > 0)
+            {
+
+                AttaqueDesactiver.GetComponent<SpriteRenderer>().enabled = true;
+                AttaqueActif.GetComponent<SpriteRenderer>().enabled = false;
+
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Attaque", GetComponent<Transform>().position);
+                ZoneAttaqueEffect.GetComponent<SpriteRenderer>().enabled = true;
+                ModeBaliseEffect = true;
+                multiplierAttack = 0;
+                canAttack = false;
             }
             // Supprimer les objets marqués pour suppression
             foreach (int id in objectsToRemove)
             {
                 objectsInTrigger.Remove(id);
             }
-            multiplierAttack = 0;
-            canAttack = false;
         }
         //Lancer timer si balise poser
         if (timeBaliseVerif == false)
@@ -152,6 +197,7 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             EBalise2Base.GetComponent<SpriteRenderer>().enabled = false;
             EBalise3Base.GetComponent<SpriteRenderer>().enabled = false;
             timeBalise = timeBalise + Time.deltaTime;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/pose_balise", GetComponent<Transform>().position);
         }
         if (Input.GetKeyDown(Cb2) && timeBalise <= maxTimeBalise && timeBaliseVerif == true)
         {
@@ -164,6 +210,7 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             EBalise1Base.GetComponent<SpriteRenderer>().enabled = false;
             EBalise2Base.GetComponent<SpriteRenderer>().enabled = false;
             EBalise3Base.GetComponent<SpriteRenderer>().enabled = false;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/pose_balise", GetComponent<Transform>().position);
 
             if (WhoAttack.ToString() == "Rouge")
             {
@@ -186,6 +233,7 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             EBalise1Base.GetComponent<SpriteRenderer>().enabled = false;
             EBalise2Base.GetComponent<SpriteRenderer>().enabled = false;
             EBalise3Base.GetComponent<SpriteRenderer>().enabled = false;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/pose_balise", GetComponent<Transform>().position);
 
             if (WhoAttack.ToString() == "Rouge")
             {
@@ -198,18 +246,24 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
             timeBalise = timeBalise + Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(keyModeBalise) && modeBaliseVerif == true)
+        if (Input.GetKeyDown(keyModeBalise) && modeBaliseVerif == true && timeMB >= maxMB)
         {
+            BaliseDesactiver.GetComponent<SpriteRenderer>().enabled = true;
+            BaliseActif.GetComponent<SpriteRenderer>().enabled = false;
+            ModeBaliseEffectGO.GetComponent<SpriteRenderer>().enabled = false;
             //Mode balise desactivation
             modeBaliseVerif = false;
-
+            timeMB = 0;
             ModeBalise();
         }
-        else if (Input.GetKeyDown(keyModeBalise))
+        if (Input.GetKeyDown(keyModeBalise) && modeBaliseVerif == false && timeMB >= maxMB)
         {
+            BaliseDesactiver.GetComponent<SpriteRenderer>().enabled = true;
+            BaliseActif.GetComponent<SpriteRenderer>().enabled = false;
             //Mode balise activation
             modeBaliseVerif = true;
             timePing = 0;
+            timeMB = 0;
         }
         if (modeBaliseVerif == true)
         {
@@ -222,15 +276,31 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
                 timePing = 0;
             }
         }
+        timeMB = timeMB + Time.deltaTime;
+        if (timeMB >= maxMB)
+        {
+            BaliseActif.GetComponent<SpriteRenderer>().enabled = true;
+            BaliseDesactiver.GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+
         // obtenir la direction vers laquelle on applique la force, Raw permet de réaliser un ".normalized"
         direction = (Vector3.right * Input.GetAxisRaw("Horizontal Player" + this.tag) + Vector3.forward * Input.GetAxisRaw("Vertical Player" + this.tag)).normalized;
-        rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+        //rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
         }
     }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = direction * speed;
+    }
+
+
     void ModeBalise()
     {
         List<int> objectsToRemove = new List<int>(); // Pour stocker les IDs des objets à supprimer
@@ -267,10 +337,34 @@ public class Sci_PlayerController_Gnip : MonoBehaviour
         ModeBaliseEffectGO.GetComponent<SpriteRenderer>().enabled = true;
         ModeBaliseEffect = true;
     }
-
+    public void GnomEffect()
+    {
+        if (multiplierAttack == 0)
+        {
+            GnomP0.GetComponent<SpriteRenderer>().enabled = true;
+            SpriteBasePlayer.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if (multiplierAttack == 1)
+        {
+            GnomP1.GetComponent<SpriteRenderer>().enabled = true;
+            SpriteBasePlayer.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if(multiplierAttack == 2)
+        {
+            GnomP2.GetComponent<SpriteRenderer>().enabled = true;
+            SpriteBasePlayer.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if(multiplierAttack == 3)
+        {
+            GnomP3.GetComponent<SpriteRenderer>().enabled = true;
+            SpriteBasePlayer.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        AttaqueDesactiver.GetComponent<SpriteRenderer>().enabled = false;
+        AttaqueActif.GetComponent<SpriteRenderer>().enabled = true;
+        ModeBaliseEffect = true;
+    }
     void OnTriggerEnter(Collider other)
     {
-        //Objet de la couleur de la balise
             if (!objectsInTrigger.ContainsKey(other.GetInstanceID()))
             {
                 objectsInTrigger.Add(other.GetInstanceID(), other.gameObject);

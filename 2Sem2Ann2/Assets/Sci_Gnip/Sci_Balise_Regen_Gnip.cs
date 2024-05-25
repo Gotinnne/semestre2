@@ -140,6 +140,7 @@ public class Sci_Balise_Regen_Gnip : MonoBehaviour
 
     public void HealEffect()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/regen", GetComponent<Transform>().position);
         HealEffectGO.GetComponent<SpriteRenderer>().enabled = true;
         HealEffectBool = true;
     }

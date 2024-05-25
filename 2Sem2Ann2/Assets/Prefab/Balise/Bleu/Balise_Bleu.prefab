@@ -137,10 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af929a172ce7294a9acca73ce7f5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimePing: 2
+  maxTimePing: 0.5
   maxTime: 20
   destination: {fileID: 1974495408962843253}
-  distanceDestination: 2
+  distanceDestination: 1
   BaliseTag: 0
   Balise1: {fileID: 7039228204866285718}
   Balise2: {fileID: 3805373112666064291}
@@ -216,7 +216,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 7
   m_Height: 7.144921
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

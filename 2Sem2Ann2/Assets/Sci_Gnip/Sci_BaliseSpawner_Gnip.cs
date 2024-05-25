@@ -14,6 +14,14 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
     }
     public State choixBalise;
 
+    public GameObject BaliseAttaqueSP1;
+    public GameObject BaliseBouclierSP1;
+    public GameObject BaliseRegenSP1;
+
+    public GameObject BaliseAttaqueSP2;
+    public GameObject BaliseBouclierSP2;
+    public GameObject BaliseRegenSP2;
+
     public GameObject BaliseAttaqueGO;
     public GameObject BaliseBouclierGO;
     public GameObject BaliseRegenGO;
@@ -39,6 +47,10 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
     public GameObject CamBleu;
     public GameObject CamRouge;
 
+    private bool ChoiceVerif;
+    private bool Spawn1bool;
+    private bool Spawn2bool;
+
     private void Start()
     {
         CamBleu = GameObject.Find("Camera_Bleu");
@@ -47,11 +59,27 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
     void Update()
     {
         timeRemaining = timeRemaining + Time.deltaTime;
-        if (timeRemaining >= maxTime && VerifSpawn == false)
+
+        if(timeRemaining >= maxTime * 0.5 && Spawn1bool == false)
         {
             Destroy(lastBalise);
+            Spawn1();
+            Spawn1bool = true;
+        }
+        if (timeRemaining >= maxTime * 0.8 && Spawn2bool == false)
+        {
+            Spawn2();
+            Spawn2bool = true;
+        }
+        if (timeRemaining >= maxTime && VerifSpawn == false)
+        {
+            VerifSpawn = true;
+            Spawn();
+        }
+        if(ChoiceVerif == false)
+        {
             randBalise = Random.Range(1, 4);
-            if(randBalise == 1)
+            if (randBalise == 1)
             {
                 choixBalise = State.BaliseAttaque;
             }
@@ -63,9 +91,7 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
             {
                 choixBalise = State.BaliseRegen;
             }
-            Spawn();
-            VerifSpawn = true;
-            timeRemaining = 0;
+            ChoiceVerif = true;
         }
         if(Player != null)
         {
@@ -75,18 +101,53 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
             }
         }
     }
-
+    void Spawn1()
+    {
+        switch (choixBalise)
+        {
+            case State.BaliseAttaque:
+                BaliseAttaqueSP1.GetComponent<SpriteRenderer>().enabled = true;
+                break;
+            case State.BaliseBouclier:
+                BaliseBouclierSP1.GetComponent<SpriteRenderer>().enabled = true;
+                break;
+            case State.BaliseRegen:
+                BaliseRegenSP1.GetComponent<SpriteRenderer>().enabled = true;
+                break;
+        }
+    }
+    void Spawn2()
+    {
+        switch (choixBalise)
+        {
+            case State.BaliseAttaque:
+                BaliseAttaqueSP1.GetComponent<SpriteRenderer>().enabled = false;
+                BaliseAttaqueSP2.GetComponent<SpriteRenderer>().enabled = true;
+                break;
+            case State.BaliseBouclier:
+                BaliseBouclierSP1.GetComponent<SpriteRenderer>().enabled = false;
+                BaliseBouclierSP2.GetComponent<SpriteRenderer>().enabled = true;
+                break;
+            case State.BaliseRegen:
+                BaliseRegenSP1.GetComponent<SpriteRenderer>().enabled = false;
+                BaliseRegenSP2.GetComponent<SpriteRenderer>().enabled = true;
+                break;
+        }
+    }
     void Spawn()
     {
         switch (choixBalise)
         {
             case State.BaliseAttaque:
+                BaliseAttaqueSP2.GetComponent<SpriteRenderer>().enabled = false;
                 lastBalise = Instantiate(BaliseAttaqueGO, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
                 break;
             case State.BaliseBouclier:
+                BaliseBouclierSP2.GetComponent<SpriteRenderer>().enabled = false;
                 lastBalise = Instantiate(BaliseBouclierGO, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
                 break;
             case State.BaliseRegen:
+                BaliseRegenSP2.GetComponent<SpriteRenderer>().enabled = false;
                 lastBalise = Instantiate(BaliseRegenGO, this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation);
                 break;
         }
@@ -181,11 +242,14 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                             CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Regen;
                             break;
                     }
-                    Destroy(lastBalise);
-                    VerifSpawn = false;
-                    timeRemaining = 0;
                 }
             }
+            timeRemaining = 0;
+            VerifSpawn = false;
+            Spawn1bool = false;
+            Spawn2bool = false;
+            ChoiceVerif = false;
+            Destroy(lastBalise);
         }
     }
     void OnTriggerEnter(Collider other)

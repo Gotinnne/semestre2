@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c30d9f3c-712b-4d9e-bb23-1ea48a219ff4}">
+		<property name="name">
+			<value>2 feuilles récup</value>
+		</property>
+		<relationship name="folder">
+			<destination>{e8696410-f5e1-4b44-af3a-29361add60c1}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{5abe52bd-a0a2-4e82-8b4e-c4f76bd45dbf}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{5abe52bd-a0a2-4e82-8b4e-c4f76bd45dbf}">
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -21,9 +21,12 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
 
     private Sci_Individu_Gnip scriptIndividu;
     private Sci_PlayerController_Gnip playerController;
+    private Sci_QueenBehaviour_Gnip QueenBehaviour;
     public int oldAtk = 1;
-    public int oldPlayerAtk = 1;
+    public float oldPlayerAtk = 1;
+    public float oldQueenAtk = 5;
     public int boostAtk = 1;
+    public bool PlayerBoosted = false;
 
     //healEffect
     public GameObject HealEffectGO;
@@ -48,9 +51,17 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
                     playerController = other.GetComponent<Sci_PlayerController_Gnip>();
                     if (scriptIndividu == null && playerController == null)
                     {
-                        HealEffect();
-                        other.GetComponent<Sci_Health_Gnip>().DgtUpEffect();
-                        //effetqueen
+                        QueenBehaviour = other.GetComponent<Sci_QueenBehaviour_Gnip>();
+                        if(QueenBehaviour != null)
+                        {
+                            HealEffect();
+                            other.GetComponent<Sci_Health_Gnip>().DgtUpEffect();
+                            oldQueenAtk = QueenBehaviour.dgtReine;
+                            if(QueenBehaviour.maxTimer != 1)
+                            {
+                                QueenBehaviour.maxTimer = QueenBehaviour.maxTimer - 1;
+                            }
+                        }
                     }
                 }
                 if (scriptIndividu != null)
@@ -66,11 +77,12 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
                 if(playerController != null)
                 {
                     oldPlayerAtk = playerController.dgtPlayer;
-                    if (playerController.dgtPlayer != (oldPlayerAtk + boostAtk))
+                    if (playerController.dgtPlayer != (oldPlayerAtk + boostAtk) && PlayerBoosted == false)
                     {
                         HealEffect();
                         other.GetComponent<Sci_Health_Gnip>().DgtUpEffect();
                         playerController.dgtPlayer = (oldPlayerAtk + boostAtk);
+                        PlayerBoosted = true;
                     }
                 }
             }
@@ -78,7 +90,6 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        
         //permet d'arreter set destination si individu sort de la zone
         if (objetsBoosted.ContainsKey(other.GetInstanceID()))
         {
@@ -98,11 +109,9 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
             }
             if (playerController != null)
             {
-                if (playerController.dgtPlayer == (oldPlayerAtk + boostAtk))
-                {
-                    other.GetComponent<Sci_Health_Gnip>().DgtUpEffectFalse();
-                    playerController.dgtPlayer = oldPlayerAtk;
-                }
+                other.GetComponent<Sci_Health_Gnip>().DgtUpEffectFalse();
+                playerController.dgtPlayer = oldPlayerAtk;
+                PlayerBoosted = false;
             }
         }
     }
@@ -123,6 +132,25 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
 
         if (timeRemaining >= maxTime)
         {
+            foreach (var obj in objetsBoosted.Values)
+            {
+                if (scriptIndividu != null)
+                {
+                    if (scriptIndividu.dgtMinion == (oldAtk + boostAtk))
+                    {
+                        scriptIndividu.dgtMinion = oldAtk;
+                        obj.GetComponent<Sci_Health_Gnip>().DgtUpEffectFalse();
+                    }
+                }
+            }
+            if(playerController !=null)
+            {
+                playerController.dgtPlayer = oldPlayerAtk;
+            }
+            if(QueenBehaviour !=  null)
+            {
+                QueenBehaviour.maxTimer = QueenBehaviour.maxTimer + 1;
+            }
             Destroy(gameObject);
         }
         if (timeRemaining > maxTime * 0.4)
@@ -139,6 +167,7 @@ public class Sci_Balise_Attaque_Gnip : MonoBehaviour
 
     public void HealEffect()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/boost_attaque", GetComponent<Transform>().position);
         HealEffectGO.GetComponent<SpriteRenderer>().enabled = true;
         HealEffectBool = true;
     }

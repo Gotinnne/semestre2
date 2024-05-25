@@ -19,12 +19,14 @@ public class Sci_Health_Gnip : MonoBehaviour
 
     public float maxTimerPlayer;
     public float timerPlayer;
+    public SpriteRenderer PlayerSprite;
 
     public float lenghtHealthBar = 5;
     private float lenghtHealthBarMax;
     public GameObject Barre;
     public bool BoolSpawn = true;
-
+    public Vector3 RespawnPoint;
+    public bool IsDead= false;
 
     //healEffect
     public GameObject HealEffectGO;
@@ -43,14 +45,32 @@ public class Sci_Health_Gnip : MonoBehaviour
     public GameObject Bouclier3GOdgt;
     //BaliseDGT
     public GameObject DgtUpEffectGO;
+    //MinionsEffect
+    public GameObject DeathMinion;
+
+
     //QueenEffect
     public GameObject DgtEffectQueen;
     public GameObject DgtUpEffectQueen;
     public GameObject HealEffectQueen;
     public GameObject BouclierEffectQueen;
     public GameObject QueenBase;
+    //PlayerEffect
+    public GameObject DeathScreenRed;
+    public GameObject DeathScreenBlue;
+
+    //sons
+    private FMOD.Studio.EventInstance event_DestructionSpawner;
+    public int MinionsAutour = 0;
+
     void Start()
     {
+    if(gameObject.tag == "spawner")
+        {
+            event_DestructionSpawner = FMODUnity.RuntimeManager.CreateInstance("event:/autres/Destruction_Spawner");
+            event_DestructionSpawner.start();
+        }
+        RespawnPoint = transform.position;
         if (this.name == "Queen_Bleu" || this.name == "Queen_Rouge")
         {
 
@@ -70,7 +90,12 @@ public class Sci_Health_Gnip : MonoBehaviour
     }
     void Update()
     {
-
+        if(gameObject.tag == "spawner")
+        {
+            MinionsAutour = this.gameObject.GetComponent<Sci_SpawnTrigger_Gnip>().MinionsAutour;
+            event_DestructionSpawner.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            event_DestructionSpawner.setParameterByName("NumMinions", MinionsAutour); 
+        }
         //Update
         if (this.name == "Queen_Bleu" || this.name == "Queen_Rouge")
         {
@@ -82,7 +107,6 @@ public class Sci_Health_Gnip : MonoBehaviour
             UpdateHealthBar();
             healthBar.localScale = new Vector3(lenghtHealthBar, 1, 1);
         }
-
         //effets
         if (EffectBool == true)
         {
@@ -109,18 +133,20 @@ public class Sci_Health_Gnip : MonoBehaviour
                     DgtUpEffectQueen.GetComponent<SpriteRenderer>().enabled = false;
                 }
             }
+            if (IsDead == true)
+            {
+                Destroy(gameObject);
+            }
             EffectBool = false;
             TimerEffect = 0;
             TimeEffectmax = 0.2f;
         }
-
-
-
         //vérification mort de l'entité
         if (health <= 0) 
         {
             if (gameObject.tag == "spawner")
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/autres/Destruction_Spawner", GetComponent<Transform>().position);
                 //si entité un spawner désactiver durant timer
                 Sci_Spawn_Gnip SpawnerCode = this.gameObject.GetComponent<Sci_Spawn_Gnip>();
                 SpawnerCode.SpawnerDetruit.GetComponent<SpriteRenderer>().enabled = true;
@@ -138,20 +164,47 @@ public class Sci_Health_Gnip : MonoBehaviour
                 }
             }
             if (gameObject.name == "Player_Rouge" || gameObject.name == "Player_Bleu")
-            {  
+            {
                 //si entité un spawner désactiver durant timer
-
+                this.gameObject.GetComponent<Transform>().position = RespawnPoint;
+                Sci_PlayerController_Gnip PlayerCode = this.gameObject.GetComponent<Sci_PlayerController_Gnip>();
+                PlayerSprite.enabled = false;
+                PlayerCode.enabled = false;
+                if(gameObject.name == "Player_Rouge")
+                {
+                    DeathScreenRed.gameObject.SetActive(true);
+                }
+                if (gameObject.name == "Player_Bleu")
+                {
+                    DeathScreenBlue.gameObject.SetActive(true);
+                }
                 timerPlayer = Time.deltaTime + timerPlayer;
                 if (timerPlayer >= maxTimerPlayer)
                 {
+                    if (gameObject.name == "Player_Rouge")
+                    {
+                        DeathScreenRed.gameObject.SetActive(false);
+                    }
+                    if (gameObject.name == "Player_Bleu")
+                    {
+                        DeathScreenBlue.gameObject.SetActive(false);
+                    }
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Player/MortPlayer", GetComponent<Transform>().position);
+                    health = maxHealth;
+                    this.gameObject.GetComponent<Collider>().enabled = true;
+                    this.gameObject.GetComponent<Sci_PlayerController_Gnip>().enabled = true;
+                    PlayerSprite.enabled = true;
                     timerPlayer = 0;
-                    //effet de respawn player
                     maxTimerPlayer = maxTimerPlayer + 5;
                 }
             }
             if(gameObject.tag != "spawner" && gameObject.name != "Player_Rouge" && gameObject.name != "Player_Bleu")
             {
-                Destroy(gameObject);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Minion/Mort_Minion", GetComponent<Transform>().position);
+                DeathMinion.GetComponent<SpriteRenderer>().enabled = true;
+                TimeEffectmax = 0.5f;
+                EffectBool = true;
+                IsDead = true;
             }
         }
     }

@@ -90,6 +90,7 @@ public class Sci_Balise_Bouclier_Gnip : MonoBehaviour
 
     public void HealEffect()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/recup_bouclier", GetComponent<Transform>().position);
         HealEffectGO.GetComponent<SpriteRenderer>().enabled = true;
         HealEffectBool = true;
     }

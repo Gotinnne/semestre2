@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{b65f01b1-5e69-4b06-bd1e-a4aae21139da}">
+		<property name="assetPath">
+			<value>bonus attaque.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.5800000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34db274b-8459-40ec-9d66-d6026edbdf2e}</destination>
+		</relationship>
+	</object>
+</objects>

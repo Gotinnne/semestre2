@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{5e5232f5-8900-4245-a028-dc1f70e1838c}">
+		<property name="name">
+			<value>NumMinions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{e8696410-f5e1-4b44-af3a-29361add60c1}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1427e1e2-c81e-4192-999b-f226724956c9}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1427e1e2-c81e-4192-999b-f226724956c9}">
+		<property name="maximum">
+			<value>6</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

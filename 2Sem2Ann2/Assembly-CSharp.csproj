@@ -65,6 +65,7 @@
     <Compile Include="Assets\Sci_Gnip\Sci_Balise_Attaque_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_LaunchIdle.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_CamVisibility\Sci_RayCast_Var_CamVisibility.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_SpawnTrigger_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Spawn_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Inventaire_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\SmoothFollow1.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Assets\Sci_Gnip\Sci_PlayerController_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Spawn.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Ping.cs" />
+    <Compile Include="Assets\Sci_Gnip\Sci_QueenBehaviour_Gnip.cs" />
     <Compile Include="Assets\Sci_Gnip\Sci_Individu_Gnip.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Var_Cam\Sci_Ping_Var_Cam.cs" />
     <Compile Include="Assets\Variations\Scripts Variations\Sci_Base\Sci_Exit.cs" />

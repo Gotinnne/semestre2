@@ -19,6 +19,8 @@ public class Sci_Spawn_Gnip : MonoBehaviour
     public GameObject SpawnerDetruit;
     public GameObject SpawnerSpawn;
 
+
+
     private void Start()
     {
         SpawnerDetruit.GetComponent<SpriteRenderer>().enabled = false;

@@ -19,14 +19,16 @@ public class Sci_NomMinion_Gnip : MonoBehaviour
 
     void Update()
     {
-        if (objectsInTrigger.Count > 0 && Input.GetKeyDown(keyNom))
+        if (objectsInTrigger.Count > 0 && PlayerController.multiplierAttack < 3 && Input.GetKeyDown(keyNom))
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Nom", GetComponent<Transform>().position);
             int MinionRan = UnityEngine.Random.Range(0, objectsInTrigger.Count);
             MinionRan = objectsInTrigger.Keys.ElementAt(MinionRan);
             objectsInTrigger.TryGetValue(MinionRan, out randomObject);
+            Destroy(randomObject);
             PlayerController.canAttack = true;
             PlayerController.multiplierAttack = PlayerController.multiplierAttack + 1;
-            Destroy(randomObject);
+            PlayerController.GnomEffect();
             objectsInTrigger.Remove(MinionRan);
         }
         if(PlayerController.multiplierAttack == 0)

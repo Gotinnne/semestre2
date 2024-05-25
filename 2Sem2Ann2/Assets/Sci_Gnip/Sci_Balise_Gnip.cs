@@ -41,6 +41,10 @@ public class Sci_Balise_Gnip : MonoBehaviour
             if (!objectsInTrigger.ContainsKey(other.GetInstanceID()))
             {
                 objectsInTrigger.Add(other.GetInstanceID(), other.gameObject);
+                if(other.GetComponent<Sci_Individu_Gnip>() != null)
+                {
+                    other.GetComponent<Sci_Individu_Gnip>().baliseVerif = true;
+                }
             }
         }
     }
@@ -107,17 +111,6 @@ public class Sci_Balise_Gnip : MonoBehaviour
                 {
                     // Si l'agent est null, marquez l'objet pour suppression
                     objectsToRemove.Add(obj.GetInstanceID());
-                }
-
-                if (timeRemaining >= maxTime)
-                {
-                    // Vérifie si l'objet possède un composant Sci_Individu_Gnip
-                    Sci_Individu_Gnip sciIndividu = obj.GetComponent<Sci_Individu_Gnip>();
-                    if (sciIndividu != null)
-                    {
-                        // Appeler Follow() peut lancer une NullReferenceException si sciIndividu est null
-                        obj.gameObject.GetComponent<Sci_Individu_Gnip>().ChangeState(Sci_Individu_Gnip.State.Follow);
-                    }
                 }
             }
         }

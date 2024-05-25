@@ -102,13 +102,11 @@ public class Sci_Individu_Gnip : MonoBehaviour
             ennemiToAttack = exit;
         }
     }
-
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(this.transform.position, distanceAttaque);
     }
-
     void Update()
     {
         if(ExitChosen.GetComponent<Sci_Health_Gnip>().BoolSpawn == true && goForTheQueen == false)
@@ -254,7 +252,6 @@ public class Sci_Individu_Gnip : MonoBehaviour
     }
     private void UpdateAttack()
     {
-        //ne fonctionne pas
         if (ennemiToAttack != null && ennemiToAttack.GetComponent<Sci_Health_Gnip>().BoolSpawn == false)
         {
             exit = Queen;
@@ -285,6 +282,7 @@ public class Sci_Individu_Gnip : MonoBehaviour
                 Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
                 if (timer >= maxTimer)
                 {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Minion/Attaque Troupe", GetComponent<Transform>().position);
                     healthComponent.InflictDgt(dgtMinion);
                     timer = 0;
                 }
@@ -310,7 +308,6 @@ public class Sci_Individu_Gnip : MonoBehaviour
         goForTheQueen = true;
         exit = Queen;
         target = new Vector3(Random.Range(exit.GetComponent<Transform>().position.x - 1, exit.GetComponent<Transform>().position.x + 1), 0, exit.GetComponent<Transform>().position.z - 1);
-        
     }
     private void UpdateGoQueen()
     {
@@ -323,6 +320,7 @@ public class Sci_Individu_Gnip : MonoBehaviour
             Sci_Health_Gnip healthComponent = EnnemiGameObject.GetComponent<Sci_Health_Gnip>();
             if (timer >= maxTimer)
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Minion/Attaque Troupe", GetComponent<Transform>().position);
                 healthComponent.InflictDgt(dgtMinion);
                 timer = 0;
             }
