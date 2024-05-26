@@ -524,7 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfShield: 10
   BaliseTag: 1
-  amountOfHealthFromShield: 3
+  amountOfHealthFromShield: 2
   HealEffectGO: {fileID: 2208847798833629629}
   TimeEffectmax: 0.5
   Balise1: {fileID: 3454405816707674853}

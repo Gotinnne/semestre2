@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Sci_Health_Gnip : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Sci_Health_Gnip : MonoBehaviour
     private Transform healthBar;
 
     public float shield;
+    public float maxShield = 2;
     public bool shieldActif;
 
     public float maxTimerSpawn;
@@ -20,6 +22,14 @@ public class Sci_Health_Gnip : MonoBehaviour
     public float maxTimerPlayer;
     public float timerPlayer;
     public SpriteRenderer PlayerSprite;
+    //TimerMort_Bleu
+    public TextMeshProUGUI TimerText_Bleu;
+    public Image Contour_Bleu;
+    public Image Fill_Bleu;
+    //TimerMort_Rouge
+    public TextMeshProUGUI TimerText_Rouge;
+    public Image Contour_Rouge;
+    public Image Fill_Rouge;
 
     public float lenghtHealthBar = 5;
     private float lenghtHealthBarMax;
@@ -48,7 +58,6 @@ public class Sci_Health_Gnip : MonoBehaviour
     //MinionsEffect
     public GameObject DeathMinion;
 
-
     //QueenEffect
     public GameObject DgtEffectQueen;
     public GameObject DgtUpEffectQueen;
@@ -58,6 +67,12 @@ public class Sci_Health_Gnip : MonoBehaviour
     //PlayerEffect
     public GameObject DeathScreenRed;
     public GameObject DeathScreenBlue;
+
+    //winmenu
+    public GameObject BoutonRestart;
+    public GameObject BoutonMenu;
+    public GameObject WinBleu;
+    public GameObject WinRouge;
 
     //sons
     private FMOD.Studio.EventInstance event_DestructionSpawner;
@@ -135,7 +150,19 @@ public class Sci_Health_Gnip : MonoBehaviour
             }
             if (IsDead == true)
             {
-                Destroy(gameObject);
+                if (gameObject.tag != "spawner" && gameObject.name != "Player_Rouge" && gameObject.name != "Player_Bleu" && gameObject.name != "Queen_Bleu" && gameObject.name != "Queen_Rouge")
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Minion/Mort_Minion", GetComponent<Transform>().position);
+                    Destroy(gameObject);
+                }
+                if (gameObject.name == "Player_Rouge" || gameObject.name == "Player_Bleu")
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Player/MortPlayer", GetComponent<Transform>().position);
+                }
+                if (gameObject.tag == "spawner")
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/autres/Destruction_Spawner", GetComponent<Transform>().position);
+                }
             }
             EffectBool = false;
             TimerEffect = 0;
@@ -146,15 +173,16 @@ public class Sci_Health_Gnip : MonoBehaviour
         {
             if (gameObject.tag == "spawner")
             {
-                FMODUnity.RuntimeManager.PlayOneShot("event:/autres/Destruction_Spawner", GetComponent<Transform>().position);
                 //si entité un spawner désactiver durant timer
                 Sci_Spawn_Gnip SpawnerCode = this.gameObject.GetComponent<Sci_Spawn_Gnip>();
                 SpawnerCode.SpawnerDetruit.GetComponent<SpriteRenderer>().enabled = true;
                 SpawnerCode.enabled = false;
                 BoolSpawn = false;
                 timerSpawn = Time.deltaTime + timerSpawn;
-                if(timerSpawn >= maxTimerSpawn)
+                IsDead = true;
+                if (timerSpawn >= maxTimerSpawn)
                 {
+                    IsDead = false;
                     timerSpawn = 0;
                     BoolSpawn = true;
                     health = maxHealth;
@@ -165,31 +193,52 @@ public class Sci_Health_Gnip : MonoBehaviour
             }
             if (gameObject.name == "Player_Rouge" || gameObject.name == "Player_Bleu")
             {
+                
                 //si entité un spawner désactiver durant timer
                 this.gameObject.GetComponent<Transform>().position = RespawnPoint;
                 Sci_PlayerController_Gnip PlayerCode = this.gameObject.GetComponent<Sci_PlayerController_Gnip>();
                 PlayerSprite.enabled = false;
                 PlayerCode.enabled = false;
-                if(gameObject.name == "Player_Rouge")
+                if (gameObject.name == "Player_Rouge")
                 {
+                    Fill_Rouge.GetComponent<Image>().enabled = true;
+                    Contour_Rouge.GetComponent<Image>().enabled = true;
+                    TimerText_Rouge.enabled = true;
                     DeathScreenRed.gameObject.SetActive(true);
+                    float TimerShown = maxTimerPlayer - timerPlayer + 1;
+                    TimerText_Rouge.text = "" + (int)timerPlayer;
+                    Fill_Rouge.fillAmount = timerPlayer / maxTimerPlayer;
                 }
                 if (gameObject.name == "Player_Bleu")
                 {
+                    Fill_Bleu.GetComponent<Image>().enabled = true;
+                    Contour_Bleu.GetComponent<Image>().enabled = true;
+                    TimerText_Bleu.enabled = true;
                     DeathScreenBlue.gameObject.SetActive(true);
+                    float TimerShown =  maxTimerPlayer - timerPlayer +1;
+                    TimerText_Bleu.text = "" + (int)TimerShown;
+                    Fill_Bleu.fillAmount = timerPlayer / maxTimerPlayer;
                 }
+                IsDead = true;
                 timerPlayer = Time.deltaTime + timerPlayer;
                 if (timerPlayer >= maxTimerPlayer)
                 {
+                    IsDead = false;
                     if (gameObject.name == "Player_Rouge")
                     {
+                        Fill_Rouge.GetComponent<Image>().enabled = false;
+                        Contour_Rouge.GetComponent<Image>().enabled = false;
+                        TimerText_Rouge.enabled = false;
                         DeathScreenRed.gameObject.SetActive(false);
                     }
                     if (gameObject.name == "Player_Bleu")
                     {
+                        Fill_Bleu.GetComponent<Image>().enabled = false;
+                        Contour_Bleu.GetComponent<Image>().enabled = false;
+                        TimerText_Bleu.enabled = false;
                         DeathScreenBlue.gameObject.SetActive(false);
                     }
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Player/MortPlayer", GetComponent<Transform>().position);
+                    
                     health = maxHealth;
                     this.gameObject.GetComponent<Collider>().enabled = true;
                     this.gameObject.GetComponent<Sci_PlayerController_Gnip>().enabled = true;
@@ -198,42 +247,62 @@ public class Sci_Health_Gnip : MonoBehaviour
                     maxTimerPlayer = maxTimerPlayer + 5;
                 }
             }
-            if(gameObject.tag != "spawner" && gameObject.name != "Player_Rouge" && gameObject.name != "Player_Bleu")
+            if(gameObject.tag != "spawner" && gameObject.name != "Player_Rouge" && gameObject.name != "Player_Bleu" && gameObject.name != "Queen_Bleu" && gameObject.name != "Queen_Rouge")
             {
-                FMODUnity.RuntimeManager.PlayOneShot("event:/Minion/Mort_Minion", GetComponent<Transform>().position);
-                DeathMinion.GetComponent<SpriteRenderer>().enabled = true;
-                TimeEffectmax = 0.5f;
-                EffectBool = true;
                 IsDead = true;
             }
+            //win
+            if(gameObject.name == "Queen_Bleu")
+            {
+                //winRouge
+                BoutonRestart.SetActive(true);
+                BoutonMenu.SetActive(true);
+                WinRouge.SetActive(true);
+                Time.timeScale = 0;
+            }
+            if (gameObject.name == "Queen_Rouge")
+            {
+                //winBleu
+                BoutonRestart.SetActive(true);
+                BoutonMenu.SetActive(true);
+                WinBleu.SetActive(true);
+                Time.timeScale = 0;
+            }
         }
+    }
+    public void OnDestroy()
+    {
+        DeathMinion.GetComponent<SpriteRenderer>().enabled = true;
+        TimeEffectmax = 0.5f;
+        EffectBool = true;
     }
     public void InflictDgt(float Dgt)
     {
         if(shieldActif == true)
         {
             shield = shield - Dgt;
-            if(shield <= shield*0.7)
+            if(shield <= maxShield * 0.7)
             {
                 Bouclier1GOdgt.GetComponent<SpriteRenderer>().enabled = true;
                 Bouclier1GO.GetComponent<SpriteRenderer>().enabled = false;
                 Bouclier2GO.GetComponent<SpriteRenderer>().enabled = true;
                 EffectBool = true;
             }
-            if (shield <= shield * 0.35)
+            if (shield <= maxShield * 0.3)
             {
                 Bouclier2GOdgt.GetComponent<SpriteRenderer>().enabled = true;
                 Bouclier2GO.GetComponent<SpriteRenderer>().enabled = false;
                 Bouclier3GO.GetComponent<SpriteRenderer>().enabled = true;
                 EffectBool = true;
             }
-            if (shield < 0)
+            if (shield <= 0)
             {
                 Bouclier3GOdgt.GetComponent<SpriteRenderer>().enabled = true;
                 Bouclier3GO.GetComponent<SpriteRenderer>().enabled = false;
                 Bouclier2GO.GetComponent<SpriteRenderer>().enabled = false;
                 Bouclier1GO.GetComponent<SpriteRenderer>().enabled = false;
                 health = health + shield;
+                EffectBool = true;
                 shieldActif = false;
                 UpdateHealthBar();
                 DGTEffect();

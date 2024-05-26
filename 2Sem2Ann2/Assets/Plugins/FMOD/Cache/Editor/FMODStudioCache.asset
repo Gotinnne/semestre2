@@ -82,6 +82,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-6775333894678339275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Balises/prendre
+  m_EditorClassIdentifier: 
+  Path: event:/Balises/prendre
+  Guid:
+    Data1: 714248934
+    Data2: 1283117486
+    Data3: -1120076353
+    Data4: 1758478071
+  Banks:
+  - {fileID: 6075115635079955465}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 100
 --- !u!114 &-5561129752245245402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +188,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
+--- !u!114 &-516405309326244731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/autres/Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/autres/Spawn
+  Guid:
+    Data1: -815501611
+    Data2: 1311043294
+    Data3: 1732185747
+    Data4: -1327167813
+  Banks:
+  - {fileID: 6075115635079955465}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,12 +241,14 @@ MonoBehaviour:
   - {fileID: 1340566578998184625}
   - {fileID: -4747652962244254361}
   - {fileID: 8571512495140883349}
+  - {fileID: -516405309326244731}
+  - {fileID: -6775333894678339275}
   EditorParameters: []
   MasterBanks:
   - {fileID: 6075115635079955465}
   StringsBanks:
   - {fileID: 5985726057756617337}
-  cacheTime: 638522529528374984
+  cacheTime: 638523421853345860
   cacheVersion: 131609
 --- !u!114 &1010224143424998203
 MonoBehaviour:
@@ -366,10 +422,10 @@ MonoBehaviour:
   Path: fmodUnity2Sem2Ann2/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638522529528374984
+  lastModified: 638523421853345860
   FileSizes:
   - Name: Desktop
-    Value: 1380
+    Value: 1476
   Exists: 1
 --- !u!114 &6075115635079955465
 MonoBehaviour:
@@ -386,10 +442,10 @@ MonoBehaviour:
   Path: fmodUnity2Sem2Ann2/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638522529528344807
+  lastModified: 638523421853323421
   FileSizes:
   - Name: Desktop
-    Value: 205952
+    Value: 222080
   Exists: 1
 --- !u!114 &8571512495140883349
 MonoBehaviour:

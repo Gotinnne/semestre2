@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ac837f1f84ee9c4e86b423077dfd7b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42ecd726c4f50af4299f2281b16f4821, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -661,7 +661,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e177adbe03614db4b902f4f2226e3092, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5eff1394e97d711448666e2274d2ec50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -834,16 +834,24 @@ MonoBehaviour:
   health: 0
   maxHealth: 2
   shield: 0
+  maxShield: 2
   shieldActif: 0
   maxTimerSpawn: 0
   timerSpawn: 0
   maxTimerPlayer: 0
   timerPlayer: 0
   PlayerSprite: {fileID: 0}
+  TimerText_Bleu: {fileID: 0}
+  Contour_Bleu: {fileID: 0}
+  Fill_Bleu: {fileID: 0}
+  TimerText_Rouge: {fileID: 0}
+  Contour_Rouge: {fileID: 0}
+  Fill_Rouge: {fileID: 0}
   lenghtHealthBar: 1
   Barre: {fileID: 3603446734794954912}
   BoolSpawn: 1
   RespawnPoint: {x: 0, y: 0, z: 0}
+  IsDead: 0
   HealEffectGO: {fileID: 921822109601167534}
   TimeEffectmax: 0.5
   DgtEffectGO: {fileID: 8599699434532419083}
@@ -863,6 +871,10 @@ MonoBehaviour:
   QueenBase: {fileID: 0}
   DeathScreenRed: {fileID: 0}
   DeathScreenBlue: {fileID: 0}
+  BoutonRestart: {fileID: 0}
+  BoutonMenu: {fileID: 0}
+  WinBleu: {fileID: 0}
+  WinRouge: {fileID: 0}
   MinionsAutour: 0
 --- !u!114 &-535329178622545718
 MonoBehaviour:

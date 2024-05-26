@@ -47,9 +47,11 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
     public GameObject CamBleu;
     public GameObject CamRouge;
 
-    private bool ChoiceVerif;
+    public bool ChoiceVerif;
     private bool Spawn1bool;
     private bool Spawn2bool;
+
+    public float maxdistrecup;
 
     private void Start()
     {
@@ -78,7 +80,10 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
         }
         if(ChoiceVerif == false)
         {
-            randBalise = Random.Range(1, 4);
+            if (this.gameObject.GetComponent<Sci_SpawnerBPupper_Gnip>() == null)
+            {
+                randBalise = Random.Range(1, 4);
+            }
             if (randBalise == 1)
             {
                 choixBalise = State.BaliseAttaque;
@@ -95,7 +100,7 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
         }
         if(Player != null)
         {
-            if (timeRemaining >= maxTimePlayer && objectsInTrigger.Count > 0 && Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 == null || Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 == null)
+            if (timeRemaining >= maxTimePlayer && objectsInTrigger.Count > 0 && (Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 == null || Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 == null))
             {
                 Give(Player);
             }
@@ -176,11 +181,15 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                             CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Regen;
                             break;
                     }
-                    Destroy(lastBalise);
-                    VerifSpawn = false;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/Prendre", GetComponent<Transform>().position);
                     timeRemaining = 0;
+                    VerifSpawn = false;
+                    Spawn1bool = false;
+                    Spawn2bool = false;
+                    ChoiceVerif = false;
+                    Destroy(lastBalise);
                 }
-                else if (Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 == null && Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 == null || Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 == null && Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 != null)
+                else if ((Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 == null && Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 == null) || (Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 == null && Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 != null))
                 {
                     switch (choixBalise)
                     {
@@ -197,9 +206,13 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                             CamBleu.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Regen;
                             break;
                     }
-                    Destroy(lastBalise);
-                    VerifSpawn = false;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/Prendre", GetComponent<Transform>().position);
                     timeRemaining = 0;
+                    VerifSpawn = false;
+                    Spawn1bool = false;
+                    Spawn2bool = false;
+                    ChoiceVerif = false;
+                    Destroy(lastBalise);
                 }
             }
             else if (Player.name == "Player_Rouge")
@@ -221,9 +234,13 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                             CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_3_State = Balise_3.Regen;
                             break;
                     }
-                    Destroy(lastBalise);
-                    VerifSpawn = false;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/Prendre", GetComponent<Transform>().position);
                     timeRemaining = 0;
+                    VerifSpawn = false;
+                    Spawn1bool = false;
+                    Spawn2bool = false;
+                    ChoiceVerif = false;
+                    Destroy(lastBalise);
                 }
                 else if (Player.GetComponent<Sci_PlayerController_Gnip>().Balise2 == null && Player.GetComponent<Sci_PlayerController_Gnip>().Balise3 == null)
                 {
@@ -242,14 +259,15 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                             CamRouge.GetComponent<Sci_Inventaire_Gnip>().Balise_2_State = Balise_2.Regen;
                             break;
                     }
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Balises/Prendre", GetComponent<Transform>().position);
+                    timeRemaining = 0;
+                    VerifSpawn = false;
+                    Spawn1bool = false;
+                    Spawn2bool = false;
+                    ChoiceVerif = false;
+                    Destroy(lastBalise);
                 }
             }
-            timeRemaining = 0;
-            VerifSpawn = false;
-            Spawn1bool = false;
-            Spawn2bool = false;
-            ChoiceVerif = false;
-            Destroy(lastBalise);
         }
     }
     void OnTriggerEnter(Collider other)
@@ -264,7 +282,10 @@ public class Sci_BaliseSpawner_Gnip : MonoBehaviour
                 {
                     Player = other.gameObject;
                 }
-                Give(other.gameObject);
+                if(Vector3.Distance(Player.GetComponent<Transform>().position,gameObject.GetComponent<Transform>().position) <= maxdistrecup)
+                {
+                    Give(other.gameObject);
+                }
             }
         }
     }

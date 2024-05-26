@@ -581,6 +581,8 @@ MonoBehaviour:
   lastBalise: {fileID: 0}
   CamBleu: {fileID: 0}
   CamRouge: {fileID: 0}
+  ChoiceVerif: 0
+  maxdistrecup: 0.2
 --- !u!136 &7821724643864539903
 CapsuleCollider:
   m_ObjectHideFlags: 0
